@@ -4,10 +4,15 @@ public class Chatbot {
 	
 	private String userName;
 	private Topic david;
+	private Topic yonathan;
+	private Topic carson;
+	
 	private boolean chatting;
 	
 	public Chatbot() {
 		david = new ChatbotDavidLi();
+		//
+		
 		userName = "unknown user";
 		chatting = true;
 	}
@@ -22,6 +27,15 @@ public class Chatbot {
 	    	if(david.isTriggered(response)) {
 	    		chatting = false;
 	    		david.startChatting(response);
+	    	}
+	    	else if(yonathan.isTriggered(response)) {
+	    		chatting = false;
+	    		yonathan.startChatting(response);
+	    		
+	    	}
+	    	else if(carson.isTriggered(response)) {
+	    		chatting = false;
+	    		yonathan.startChatting(response);
 	    	}
 	    	else
 	    	{
