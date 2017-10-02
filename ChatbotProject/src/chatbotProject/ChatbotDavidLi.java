@@ -3,10 +3,12 @@ package chatbotProject;
 public class ChatbotDavidLi implements Topic {
 	
 	private String[] keywords;
-	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe."};
-	private String [] replies = {"Ah, I see!","Tell me More","How interesting!","Continue with what you were saying","I was framed for the murder of my wife"};
+	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe.","I was framed for the murder of my wife"};
+	private String [] replies = {"Ah, I see!","Tell me More","How interesting!","Continue with what you were saying"};
 	private String [] endWords;
 	private String secretWord;
+	private int questionCount = 0;
+	private int replyCount = 0;
 	private boolean chatting;
 
 	public ChatbotDavidLi() {
@@ -35,9 +37,20 @@ public class ChatbotDavidLi implements Topic {
 		ChatbotMain.print("So lets get started, what do you wish to know?");
 		chatting = true;
 		 while(chatting) {
-			 while(chatting) {
 				 response = ChatbotMain.getInput();
-				 replyResponse();
+				 if(questionCount <=5) {
+					 replyResponse();
+					 questionCount++;
+				 }
+				 else
+				 {
+					 if(replyCount <=5)
+					 {
+					 ChatbotMain.print("But thats enough about me, I'm going to ask you a few questions now");
+					 askQuestions();
+					 replyCount++;
+					 }
+				 }
 				  for(int i =0;i<endWords.length;i++) {
 					  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 					  chatting = false;
@@ -50,7 +63,7 @@ public class ChatbotDavidLi implements Topic {
 					  ChatbotMain.print("HUH, I don't really know how to answer that, can you rephrase?");
 				  }
 				  }
-		 }
+		 
 	}
 	}
 		 private void replyResponse() {
@@ -66,6 +79,11 @@ public class ChatbotDavidLi implements Topic {
 			  }
 			  
 			 
+		 }
+		 private void askQuestions() {
+			 String response = ChatbotMain.getInput();
+			  int randResponse = (int) Math.random()*replies.length;
+			 ChatbotMain.print();
 		 }
 
 /*	public void startChatting(String response) {
