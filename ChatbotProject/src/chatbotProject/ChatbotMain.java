@@ -64,14 +64,29 @@ public class ChatbotMain {
 	  
 	  public static boolean noNegations(String s, int psn){
 		  
-	      try
-	      {
-	    	 return s.substring((psn-5),psn).contains("not") || s.substring((psn-4),psn).contains("no");
-	      }
-	      catch (StringIndexOutOfBoundsException e)
-	      {
-	    	  return true;
-	      }
+		  if(psn == 0)
+		  {
+			  return true;
+		  }
+		  else
+		  {
+	    	 if(s.substring(psn-4,psn).contains("not"))
+	    		 {
+	    		 
+	    		 return false;
+	    		 }
+	    	 else 
+	    	 { 
+	    	 if(s.substring(psn-3,psn).contains("no"))
+	    	 	{
+	    		 return false;
+	    	 	}
+	    	 else
+	    	 	{
+	    		 return true;
+	    	 	}
+	    	 }
+		  }
 	  }
 	  
 	  
