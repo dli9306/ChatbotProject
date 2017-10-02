@@ -5,6 +5,7 @@ public class ChatbotDavidLi implements Topic {
 	private String[] keywords;
 	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe.","I was framed for the murder of my wife"};
 	private String [] replies = {"Ah, I see!","Tell me More","How interesting!","Continue with what you were saying"};
+	private String [] randQuestions;
 	private String [] endWords;
 	private String secretWord;
 	private int questionCount = 0;
