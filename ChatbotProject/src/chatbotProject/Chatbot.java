@@ -29,11 +29,11 @@ public class Chatbot {
 	    		chatting = false;
 	    		david.startChatting(response);
 	    	}
-	    	else if(yonathan.isTriggered(response)) {
+	    /*	else if(yonathan.isTriggered(response)) {
 	    		chatting = false;
 	    		yonathan.startChatting(response);
 	    		
-	    	}
+	    	} */
 	    	else if(carson.isTriggered(response)) {
 	    		chatting = false;
 	    		yonathan.startChatting(response);

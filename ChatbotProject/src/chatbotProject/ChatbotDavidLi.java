@@ -13,7 +13,7 @@ public class ChatbotDavidLi implements Topic {
 	private boolean chatting;
 
 	public ChatbotDavidLi() {
-		String[] temp = {"food","interenet","video games"};
+		String[] temp = {"question","questions"};
 		keywords = temp;
 		String[] temp2 = {"done","bye","goodbye","cya"};
 		endWords = temp2;
@@ -55,6 +55,7 @@ public class ChatbotDavidLi implements Topic {
 				  for(int i =0;i<endWords.length;i++) {
 					  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 					  chatting = false;
+					  ChatbotMain.print("Alright,I'll talk to you later I guess");
 					  ChatbotMain.chatbot.startTalking();
 				  }else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
 					  ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever We are friends now!");
@@ -84,7 +85,7 @@ public class ChatbotDavidLi implements Topic {
 		 private void askQuestions() {
 			 String response = ChatbotMain.getInput();
 			  int randResponse = (int) Math.random()*replies.length;
-			 ChatbotMain.print();
+			 ChatbotMain.print(replies[randResponse]);
 		 }
 
 /*	public void startChatting(String response) {
