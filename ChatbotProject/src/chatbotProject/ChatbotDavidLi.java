@@ -69,13 +69,13 @@ public class ChatbotDavidLi implements Topic {
 	}
 		 private void replyResponse() {
 			String response = ChatbotMain.getInput();
-			  if(response.contains("who are")) {
+			  if(response.contains("who are you")) {
 				  ChatbotMain.print(answers[0]);
 			  }
-			  else if(response.contains("where are")) {
+			  else if(response.contains("where")) {
 				  ChatbotMain.print(answers[1]);
 			  } 
-			  else if(response.contains("why are")) {
+			  else if(response.contains("why are you here")) {
 				  ChatbotMain.print(answers[2]);
 			  }
 			  
