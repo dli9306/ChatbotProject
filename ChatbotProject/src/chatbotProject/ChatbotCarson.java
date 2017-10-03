@@ -78,6 +78,7 @@ public class ChatbotCarson implements Topic{
 	private void askQuestions() {
 		stopRepetitions("Sorry I think you just said that.", "Please stop repeating yourself, you are making this conversation very boring.");
 		String response = ChatbotMain.getInput();
+		
 		int randResponse = (int) Math.random()*rndQuestions.length;
 		ChatbotMain.print(rndQuestions[randResponse]);
 	}
