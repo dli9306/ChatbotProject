@@ -11,7 +11,7 @@ public class Chatbot {
 	
 	public Chatbot() {
 		david = new ChatbotDavidLi();
-	  //yonathan = new ChatbotYonathan(); // EDIT THIS WITH YOUR ACTUAL CLASS FILES WHEN YOU MAKE THEM
+	  yonathan = new ChatbotYonathan(); // EDIT THIS WITH YOUR ACTUAL CLASS FILES WHEN YOU MAKE THEM
 		carson = new ChatbotCarson();
 		
 		userName = "unknown user";
@@ -29,11 +29,11 @@ public class Chatbot {
 	    		chatting = false;
 	    		david.startChatting(response);
 	    	}
-	    /*	else if(yonathan.isTriggered(response)) {
+	    else if(yonathan.isTriggered(response)) {
 	    		chatting = false;
 	    		yonathan.startChatting(response);
 	    		
-	    	} */
+	    	}
 	    	else if(carson.isTriggered(response)) {
 	    		chatting = false;
 	    		carson.startChatting(response);
