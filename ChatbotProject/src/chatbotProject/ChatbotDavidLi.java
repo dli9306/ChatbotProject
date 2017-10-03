@@ -4,12 +4,11 @@ public class ChatbotDavidLi implements Topic {
 	
 	private String[] keywords;
 	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe.","I was framed for the murder of my wife"};
-	private String [] replies = {"Ah, I see!","Tell me More","How interesting!","Continue with what you were saying"};
-	private String [] randQuestions;
+	private String [] replies = {"Ah, I see!","Tell me more","How interesting!","Continue with what you were saying"};
+	private String [] randQuestions = {"So how did you get here?","What happened to you?","How do you feel?","Do you have family around?","What did you do before you were sent here?","What do you think of this place so far?"};
 	private String [] endWords;
 	private String secretWord;
 	private int questionCount = 0;
-	private int replyCount = 0;
 	private boolean chatting;
 
 	public ChatbotDavidLi() {
@@ -18,7 +17,7 @@ public class ChatbotDavidLi implements Topic {
 		String[] temp2 = {"done","bye","goodbye","cya"};
 		endWords = temp2;
 		
-		secretWord = "pug";
+		secretWord = "pineapple";
 	}
 
 	@Override
@@ -39,71 +38,77 @@ public class ChatbotDavidLi implements Topic {
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
-				 if(questionCount <=5) {
-					 replyResponse();
+				 if(questionCount <5) {
 					 questionCount++;
+					 replyResponse(response);
+					 System.out.println(questionCount);
 				 }
 				 else
 				 {
-					 if(replyCount <=5)
-					 {
-					 ChatbotMain.print("But thats enough about me, I'm going to ask you a few questions now");
-					 askQuestions();
-					 replyCount++;
+					if(questionCount == 5) {
+					    System.out.println("But thats enough about me, I'm going to ask you a few questions now");
+					    questionCount++;
 					 }
+					else {
+					 if(questionCount >5 && questionCount < 10)
+					 {
+					 askQuestions();
+					  questionCount++;
+					 }
+					}
+				 }
+				 if(questionCount == 10)
+				 {
+					 ChatbotMain.print("Ok, seems we have talked enough for today, unless you want to know more about me but lets get on to another topic!");
+					 changeTopic();
 				 }
 				  for(int i =0;i<endWords.length;i++) {
 					  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 					  chatting = false;
 					  ChatbotMain.print("Alright,I'll talk to you later I guess");
 					  ChatbotMain.chatbot.startTalking();
-				  }else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
+				  }   
+				   if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) 
+				   {
 					  ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever We are friends now!");
 					  
-				  }
-				  else {
-					  ChatbotMain.print("HUH, I don't really know how to answer that, can you rephrase?");
-				  }
+				    }
+
 				  }
 		 
 	}
 	}
-		 private void replyResponse() {
-			String response = ChatbotMain.getInput();
-			  if(response.contains("who are you")) {
+		 private void replyResponse(String response) {
+			  if(response.toLowerCase().contains("who")) {
 				  ChatbotMain.print(answers[0]);
 			  }
-			  else if(response.contains("where")) {
+			  else if(response.toLowerCase().contains("where")) {
 				  ChatbotMain.print(answers[1]);
 			  } 
-			  else if(response.contains("why are you here")) {
+			  else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
 				  ChatbotMain.print(answers[2]);
+			  }
+			  else
+			  {
+				  ChatbotMain.print("I'm afraid I can't answer that nor can I understand it,You can ask another question if you'd like");
 			  }
 			  
 			 
 		 }
 		 private void askQuestions() {
 			 String response = ChatbotMain.getInput();
-			  int randResponse = (int) Math.random()*replies.length;
-			 ChatbotMain.print(replies[randResponse]);
-		 }
+			  int randQues =  (int) (Math.random() * randQuestions.length + 0);
+			 ChatbotMain.print(randQuestions[randQues]);
 
-/*	public void startChatting(String response) {
-		ChatbotMain.print("Hey it sounds like you and I have common interest! Lets talk some more!");
-		chatting = true;
-		while(chatting) {
-			 response = ChatbotMain.getInput();
-			  if(ChatbotMain.findKeyWord(response, goodbyeWords, 0) >= 0) {
-				  chatting = false;
-				  ChatbotMain.chatbot.startTalking();
-			  }else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
-				  ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever We are friends now!");
-				  
-			  }
-			  else {
-				  ChatbotMain.print("HUH, I don't really get you. Tell me something else?");
-			  }
-		}
-	} */
+		 }
+		 private void randReplies()
+		 {
+			 int randReplies =  (int) (Math.random() * replies.length + 0);
+			 ChatbotMain.print(replies[randReplies]);
+		 }
+		 private void changeTopic()
+		 {
+			 
+		 }
 
 }
