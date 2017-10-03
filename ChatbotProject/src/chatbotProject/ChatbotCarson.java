@@ -89,10 +89,10 @@ public class ChatbotCarson implements Topic{
 			stopRepetitions("Are your nerves getting to you?", "Do I really need to repeat myself?");
 			ChatbotMain.print(answers[0]);
 		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
-			stopRepetitions();
+			stopRepetitions("Sorry, I think you just said that.", "It doesn't seem that complicated.");
 			ChatbotMain.print(answers[1]);
 		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")) {
-			stopRepetitions();
+			stopRepetitions("You must be pretty nervous with how much you stutter.", "If you mess this plan up because you can't remember it, I will find you and you will suffer the consequences.");
 			ChatbotMain.print(answers[4]);
 		}
 	}
