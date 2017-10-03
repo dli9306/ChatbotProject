@@ -3,13 +3,16 @@ package chatbotProject;
 public class ChatbotDavidLi implements Topic {
 	
 	private String[] keywords;
-	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe.","I was framed for the murder of my wife"};
+	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on a remote island on the coast of Europe.","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","500 days","Fine at the moment"};
 	private String [] replies = {"Ah, I see!","Tell me more","How interesting!","Continue with what you were saying"};
 	private String [] randQuestions = {"So how did you get here?","What happened to you?","How do you feel?","Do you have family around?","What did you do before you were sent here?","What do you think of this place so far?"};
 	private String [] endWords;
 	private String secretWord;
 	private int questionCount = 0;
 	private boolean chatting;
+	private Topic carson = new ChatbotCarson();
+    private Topic yonathan = new ChatbotYonathan();
+    
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions"};
@@ -17,7 +20,7 @@ public class ChatbotDavidLi implements Topic {
 		String[] temp2 = {"done","bye","goodbye","cya"};
 		endWords = temp2;
 		
-		secretWord = "pineapple";
+		secretWord = "pineapplez";
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class ChatbotDavidLi implements Topic {
 				    }
 
 				  }
-		 
+
 	}
 	}
 		 private void replyResponse(String response) {
@@ -87,6 +90,18 @@ public class ChatbotDavidLi implements Topic {
 			  } 
 			  else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
 				  ChatbotMain.print(answers[2]);
+			  }
+			  else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("caught"))
+			  {
+				  ChatbotMain.print(answers[3]);
+			  }
+			  else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("long"))
+			  {
+				  ChatbotMain.print(answers[4]);
+			  }
+			  else if(response.toLowerCase().contains("feel"))
+			  {
+				  ChatbotMain.print(answers[5]);
 			  }
 			  else
 			  {
@@ -108,7 +123,26 @@ public class ChatbotDavidLi implements Topic {
 		 }
 		 private void changeTopic()
 		 {
-			 
+			 ChatbotMain.print("So do you want to learn/talk more in code, or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
+			 String response = ChatbotMain.getInput();
+		    	if(isTriggered(response)) {
+		    		questionCount = 0;
+		    		ChatbotMain.print("Ok lets talk some more");
+		    	}
+		    	else if(yonathan.isTriggered(response)) {
+		    		chatting = false;
+		    		yonathan.startChatting(response);
+		    		
+		    	} 
+		    	else if(carson.isTriggered(response)) {
+		    		chatting = false;
+		    		carson.startChatting(response);
+		    	}
+		    	else
+		    	{
+		    		ChatbotMain.print("I'm sorry, I dont understand ,maybe you could rephrase?");
+		    	}
+		    	
 		 }
 
 }

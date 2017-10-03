@@ -36,7 +36,7 @@ public class Chatbot {
 	    	}
 	    	else if(carson.isTriggered(response)) {
 	    		chatting = false;
-	    		yonathan.startChatting(response);
+	    		carson.startChatting(response);
 	    	}
 	    	else
 	    	{
