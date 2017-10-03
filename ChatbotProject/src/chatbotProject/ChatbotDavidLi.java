@@ -20,7 +20,7 @@ public class ChatbotDavidLi implements Topic {
 		String[] temp2 = {"done","bye","goodbye","cya"};
 		endWords = temp2;
 		
-		secretWord = "pineapple";
+		secretWord = "pineapplez";
 	}
 
 	@Override
