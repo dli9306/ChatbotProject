@@ -69,7 +69,7 @@ public class ChatbotYonathan implements Topic {
 			i++;
 		}
 		return output;
-	}// convert key word is isolated to method that finds words isolated by spaces or edges
+	}// convert key word is isolated to method that finds words  isolated by spaces or edges
 	public static boolean wordIsIsolated(int psn, String keyword, String s){
 		  boolean cLeft = false;
 		  boolean cRight = false;
