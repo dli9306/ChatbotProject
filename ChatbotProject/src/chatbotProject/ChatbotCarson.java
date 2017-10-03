@@ -57,26 +57,27 @@ public class ChatbotCarson implements Topic{
 		}
 	}
 	
-	private void stopRepetitions() {
+	private void stopRepetitions(String str1, String str2) {
 		int numReps = 0;
 		String lastResponse = "";
-		lastResponse = ChatbotMain.getInput();
+		String response = ChatbotMain.getInput();
 		
-		if(ChatbotMain.getInput() == lastResponse) {
+		if(response == lastResponse) {
 			numReps++;
 			if(numReps == 1) {
-				ChatbotMain.print("Sorry, I think you just said that.");
+				ChatbotMain.print(str1);
 			}else if(numReps > 1) {
-				ChatbotMain.print("Stop repeating yourself, you are making this conversation very boring");
+				ChatbotMain.print(str2);
 			}
 		}else {
 			numReps = 0;
 		}
+		lastResponse = response;
 	}
 
 	private void askQuestions() {
+		stopRepetitions("Sorry I think you just said that.", "Please stop repeating yourself, you are making this conversation very boring.");
 		String response = ChatbotMain.getInput();
-		
 		int randResponse = (int) Math.random()*rndQuestions.length;
 		ChatbotMain.print(rndQuestions[randResponse]);
 	}
@@ -85,14 +86,14 @@ public class ChatbotCarson implements Topic{
 		ChatbotMain.print("Any questions about the escape plan?");
 		String response = ChatbotMain.getInput();
 		if(response.toLowerCase().contains("how") && response.toLowerCase().contains("escape")) {
-			stopRepetitions();
+			stopRepetitions("Are your nerves getting to you?", "Do I really need to repeat myself?");
 			ChatbotMain.print(answers[0]);
 		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
 			stopRepetitions();
 			ChatbotMain.print(answers[1]);
 		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")) {
 			stopRepetitions();
-			ChatbotMain.print(answers[2]);
+			ChatbotMain.print(answers[4]);
 		}
 	}
 }
