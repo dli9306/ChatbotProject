@@ -1,7 +1,7 @@
-package chatbotproject;
+package chatbotProject;
 
-import chatbotproject.Topic;
-import chatbotproject.chatbotmain;
+import chatbotProject.Topic;
+import chatbotProject.ChatbotMain;
 
 public class ChatbotYonathan implements Topic {
 
@@ -22,7 +22,7 @@ public class ChatbotYonathan implements Topic {
 	@Override
 	public boolean isTriggered(String response) {
 		for(int i = 0; i < keywords.length; i++) {
-			if(chatbotmain.findKeyword(response, keywords[i], 0) >= 0) {
+			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 				return true;
 			}
 		}
@@ -31,17 +31,17 @@ public class ChatbotYonathan implements Topic {
 
 	@Override
 	public void startChatting(String response) {
-		chatbotmain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
+		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
 		chatting = true;
 		while(chatting) {
-			response = chatbotmain.getInput();
-			if(chatbotmain.findKeyword(response, goodbyeWord, 	0) >= 0 ) {
+			response = ChatbotMain.getInput();
+			if(ChatbotMain.findKeyword(response, goodbyeWord, 	0) >= 0 ) {
 				chatting = false;
-				chatbotmain.chatbot.startTalking();
-			}else if(chatbotmain.findKeyword(response, secretWord, 0) >= 0) {
-				chatbotmain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
+				ChatbotMain.chatbot.startTalking();
+			}else if(ChatbotMain.findKeyword(response, secretWord, 0) >= 0) {
+				ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
 			}else {
-				chatbotmain.print("Huh. I don't really get you. Tell me something else?");
+				ChatbotMain.print("Huh. I don't really get you. Tell me something else?");
 			}
 		}
 	}
@@ -60,7 +60,9 @@ public class ChatbotYonathan implements Topic {
 		String output ="";
 		while(input.length()>i) {
 			// find which index is equal to the first word of the code which will be marked by a space
-			for(int)
+			for(int o = 0;o<alphabet.length();i++) {
+				
+			}
 			output+= alphabet.charAt(index) + " ";
 			i++;
 		}
