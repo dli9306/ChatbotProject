@@ -10,9 +10,9 @@ public class ChatbotDavidLi implements Topic {
 	private String secretWord;
 	private int questionCount = 0;
 	private boolean chatting;
-	private Topic david = new ChatbotDavidLi();
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
+    
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions"};
@@ -78,7 +78,7 @@ public class ChatbotDavidLi implements Topic {
 				    }
 
 				  }
-		 
+
 	}
 	}
 		 private void replyResponse(String response) {
@@ -125,8 +125,9 @@ public class ChatbotDavidLi implements Topic {
 		 {
 			 ChatbotMain.print("So do you want to learn/talk more in code, or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
 			 String response = ChatbotMain.getInput();
-		    	if(david.isTriggered(response)) {
-		    		david.startChatting(response);
+		    	if(isTriggered(response)) {
+		    		questionCount = 0;
+		    		ChatbotMain.print("Ok lets talk some more");
 		    	}
 		    	else if(yonathan.isTriggered(response)) {
 		    		chatting = false;
@@ -139,7 +140,7 @@ public class ChatbotDavidLi implements Topic {
 		    	}
 		    	else
 		    	{
-		    		ChatbotMain.print("I'm sorry, I dont understand");
+		    		ChatbotMain.print("I'm sorry, I dont understand ,maybe you could rephrase?");
 		    	}
 		    	
 		 }
