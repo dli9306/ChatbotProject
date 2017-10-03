@@ -12,6 +12,7 @@ public class ChatbotDavidLi implements Topic {
 	private boolean chatting;
 	private Topic david = new ChatbotDavidLi();
 	private Topic carson = new ChatbotCarson();
+    private Topic yonathan = new ChatbotYonathan();
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions"};
@@ -127,11 +128,11 @@ public class ChatbotDavidLi implements Topic {
 		    	if(david.isTriggered(response)) {
 		    		david.startChatting(response);
 		    	}
-		    /*	else if(yonathan.isTriggered(response)) {
+		    	else if(yonathan.isTriggered(response)) {
 		    		chatting = false;
 		    		yonathan.startChatting(response);
 		    		
-		    	} */
+		    	} 
 		    	else if(carson.isTriggered(response)) {
 		    		chatting = false;
 		    		carson.startChatting(response);
