@@ -22,7 +22,7 @@ public class ChatbotYonathan implements Topic {
 	@Override
 	public boolean isTriggered(String response) {
 		for(int i = 0; i < keywords.length; i++) {
-			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+			if(ChatbotMain.findKeyWord(response, keywords[i], 0) >= 0) {
 				return true;
 			}
 		}
@@ -35,10 +35,10 @@ public class ChatbotYonathan implements Topic {
 		chatting = true;
 		while(chatting) {
 			response = ChatbotMain.getInput();
-			if(ChatbotMain.findKeyword(response, goodbyeWord, 	0) >= 0 ) {
+			if(ChatbotMain.findKeyWord(response, goodbyeWord, 	0) >= 0 ) {
 				chatting = false;
 				ChatbotMain.chatbot.startTalking();
-			}else if(ChatbotMain.findKeyword(response, secretWord, 0) >= 0) {
+			}else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
 				ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
 			}else {
 				ChatbotMain.print("Huh. I don't really get you. Tell me something else?");
@@ -60,12 +60,38 @@ public class ChatbotYonathan implements Topic {
 		String output ="";
 		while(input.length()>i) {
 			// find which index is equal to the first word of the code which will be marked by a space
-			for(int o = 0;o<alphabet.length();i++) {
-				
+			for(int o = 0;o<27;o++) {
+				if() {
+					
+				}
 			}
 			output+= alphabet.charAt(index) + " ";
 			i++;
 		}
 		return output;
+	}// convert key word is isolated to method that finds words isolated by spaces or edges
+	public static boolean wordIsIsolated(int psn, String keyword, String s){
+		  boolean cLeft = false;
+		  boolean cRight = false;
+		  if(psn == 0)
+		  {
+			  cLeft = true;
+		  }
+		  else
+		  {
+			  if(s.substring(psn-1,psn).compareTo("a")<0)
+			  {
+				 cLeft = true;
+			  }
+		  }
+		  if(psn+ keyword.length() == s.length())
+		  {
+			  cRight = true;
+		  }
+		  else if(s.substring(psn+keyword.length(),psn+keyword.length()+1).compareTo("a")<0)
+		  {
+			  cRight = true;
+		  }
+	         return cRight && cLeft;
 	}
 }
