@@ -12,6 +12,8 @@ public class ChatbotDavidLi implements Topic {
 	private boolean chatting;
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
+    public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
+	public static String alphabet ="abcdefghijklmnopqrstuvwxyz ";
     
 
 	public ChatbotDavidLi() {
@@ -37,7 +39,7 @@ public class ChatbotDavidLi implements Topic {
 
 	@Override
 	public void startChatting(String response) {
-		ChatbotMain.print("So lets get started, what do you wish to know?");
+		ChatbotMain.print(encoder("So lets get started what do you wish to know"));
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
@@ -66,7 +68,7 @@ public class ChatbotDavidLi implements Topic {
 					 changeTopic();
 				 }
 				  for(int i =0;i<endWords.length;i++) {
-					  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
+					  if(ChatbotMain.findKeyWord(response.toLowerCase(), endWords[i], 0) >= 0) {
 					  chatting = false;
 					  ChatbotMain.print("Alright,I'll talk to you later I guess");
 					  ChatbotMain.chatbot.startTalking();
@@ -144,5 +146,15 @@ public class ChatbotDavidLi implements Topic {
 		    	}
 		    	
 		 }
+			public static String encoder(String input){
+				int i = 0;
+				String output ="";
+				while(input.length()>i) {
+					int index = alphabet.indexOf(input.toLowerCase().charAt(i));
+					output+= alphabetsoup[index] + " ";
+					i++;
+				}
+				return output;
+			}
 
 }
