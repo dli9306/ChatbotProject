@@ -12,7 +12,7 @@ public class ChatbotDavidLi implements Topic {
 	private String [] happyReplies = {"Good to here","Good for you!"};
 	private String [] endWords;
 	private int questionCount = 0;
-	private int replyCount = 0;
+	private int replyCount = -1;
 	private boolean chatting;
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
@@ -21,7 +21,7 @@ public class ChatbotDavidLi implements Topic {
     
 
 	public ChatbotDavidLi() {
-		String[] temp = {"question","questions","ask"};
+		String[] temp = {"question","questions","ask","f"};
 		keywords = temp;
 		String[] temp2 = {"done","bye","goodbye","cya"};
 		endWords = temp2;
@@ -32,7 +32,7 @@ public class ChatbotDavidLi implements Topic {
 	public boolean isTriggered(String response) {
 		for(int i =0;i<keywords.length;i++)
 		{
-			if(ChatbotMain.findKeyWord(response, keywords[i],0) > 0)
+			if(ChatbotMain.findKeyWord(response, keywords[i],0) >= 0)
 			{
 				return true;
 			}
@@ -54,20 +54,33 @@ public class ChatbotDavidLi implements Topic {
 				 if(questionCount == 5)
 				 {
 					    System.out.println("But thats enough about me, I'm going to ask you a few questions now");
-					    replyCount++;
 					    questionCount++;
+					    replyCount++;
 				  }
-				   if(replyCount >0)
-					{
-					  replyCount++;
-					 askQuestions(response);
-					}
-				
-				 if(replyCount == 5)
-				 {
-					 ChatbotMain.print("Ok, seems we have talked enough for today, unless you want to know more about me but lets get on to another topic!");
-					 changeTopic();
-				 }
+                   if(replyCount == 0)
+                  {
+                	   askQuestions();
+                       replyCount++;
+                       System.out.println(replyCount);
+                  }
+                   else {
+           
+                    if(replyCount > 0 && replyCount <5) {
+					   replyResponse2(response);
+					   askQuestions();
+                       replyCount++;
+					   System.out.println(replyCount);
+                    }
+                    else { 
+                    	if(replyCount == 5)
+   				 		{
+                    		ChatbotMain.print("Ok, seems we have talked enough for today, unless you want to know more about me but lets get on to another topic!");
+                    		changeTopic();
+                    		replyCount++;
+   				 		}
+                    }
+                   }
+
 				  for(int i =0;i<endWords.length;i++) 
 				  {
 					  if(ChatbotMain.findKeyWord(response.toLowerCase(), endWords[i], 0) >= 0) {
@@ -139,7 +152,7 @@ public class ChatbotDavidLi implements Topic {
 			  
 			 
 		 }
-		 private void askQuestions(String response) {
+		 private void askQuestions(){
 			 String[] randQ = randQuestions;
 			 int randQues =  (int) (Math.random() * randQuestions.length + 0);
 			  while(randQuestions[randQues] == " ")
@@ -148,13 +161,12 @@ public class ChatbotDavidLi implements Topic {
 			  }
 			 ChatbotMain.print(randQ[randQues]);
 			 randQ[randQues] = " ";
-			 replyResponse2(response);
 
 		 }
 
 		 private void changeTopic()
 		 {
-			 ChatbotMain.print("So do you want to learn/talk more in code, or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
+			 ChatbotMain.print("So do you want to be reminded on the code or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
 			 String response = ChatbotMain.getInput();
 		    	if(isTriggered(response)) {
 		    		questionCount = 0;
