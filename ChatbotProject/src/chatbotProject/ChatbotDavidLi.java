@@ -42,7 +42,7 @@ public class ChatbotDavidLi implements Topic {
 
 	@Override
 	public void startChatting(String response) {
-		ChatbotMain.print("So lets get started what do you wish to know");
+		ChatbotMain.print("So lets get started what do you want to ask");
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
@@ -57,28 +57,28 @@ public class ChatbotDavidLi implements Topic {
 					    questionCount++;
 					    replyCount++;
 				  }
-                   if(replyCount == 0)
+                  if(replyCount == 0)
                   {
                 	   askQuestions();
                        replyCount++;
                        System.out.println(replyCount);
                   }
-                   else {
+                  else {
            
-                    if(replyCount > 0 && replyCount <5) {
-					   replyResponse2(response);
-					   askQuestions();
-                       replyCount++;
-					   System.out.println(replyCount);
-                    }
-                    else { 
-                    	if(replyCount == 5)
-   				 		{
-                    		ChatbotMain.print("Ok, seems we have talked enough for today, unless you want to know more about me but lets get on to another topic!");
-                    		changeTopic();
-                    		replyCount++;
-   				 		}
-                    }
+                	  if(replyCount > 0 && replyCount <5) {
+                		  replyResponse2(response);
+                		  askQuestions();
+                		  replyCount++;
+                		  System.out.println(replyCount);
+                	   }
+                	  else { 
+                		  	 if(replyCount == 5)
+                		  	 {
+                		  		ChatbotMain.print("Ok, seems we have talked for quite a bit");
+                		  		changeTopic();
+                		  		replyCount++;
+                		  	 }
+                    		}	
                    }
 
 				  for(int i =0;i<endWords.length;i++) 
@@ -87,11 +87,11 @@ public class ChatbotDavidLi implements Topic {
 					  chatting = false;
 					  ChatbotMain.print("Alright,I'll talk to you later I guess");
 					  ChatbotMain.chatbot.startTalking();
-				  }   
+					  }   
 
 				  
-				  	}
-		 }
+				 }
+		 	}
 		 }
 
 	
@@ -125,33 +125,23 @@ public class ChatbotDavidLi implements Topic {
 			  }
 			  else if(response.toLowerCase().contains("where")) {
 				  ChatbotMain.print(answers[1]);
-			  } 
-			  else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
+			  } else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
 				  ChatbotMain.print(answers[2]);
-			  }
-			  else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("caught") || response.toLowerCase().contains("what") && response.toLowerCase().contains("happened"))
-			  {
-				  ChatbotMain.print(answers[3]);
-			  }
-			  else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("long"))
-			  {
-				  ChatbotMain.print(answers[4]);
-			  }
-			  else if(response.toLowerCase().contains("feel"))
-			  {
-				  ChatbotMain.print(answers[5]);
-			  }
-			  else if(response.toLowerCase().contains("where") && response.toLowerCase().contains("live") )
-			  {
-				  ChatbotMain.print(answers[6]);
-			  }
-			  else
-			  {
-				  ChatbotMain.print("I'm afraid I can't answer that nor can I understand it,You can ask another question if you'd like");
+			  }else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("caught") || response.toLowerCase().contains("what") && response.toLowerCase().contains("happened"))
+			  {	  ChatbotMain.print(answers[3]);
+			  }else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("long")){
+			    ChatbotMain.print(answers[4]);
+			  }else if(response.toLowerCase().contains("feel")){
+			    ChatbotMain.print(answers[5]);
+			  }else if(response.toLowerCase().contains("where") && response.toLowerCase().contains("live") ) {
+	            ChatbotMain.print(answers[6]);
+			  }else {
+				ChatbotMain.print("I'm afraid I can't answer that nor can I understand it,You can ask another question if you'd like");
 			  }
 			  
 			 
 		 }
+		
 		 private void askQuestions(){
 			 String[] randQ = randQuestions;
 			 int randQues =  (int) (Math.random() * randQuestions.length + 0);
@@ -166,11 +156,11 @@ public class ChatbotDavidLi implements Topic {
 
 		 private void changeTopic()
 		 {
-			 ChatbotMain.print("So do you want to be reminded on the code or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
+			 ChatbotMain.print("Do you want to be reminded on the code or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
 			 String response = ChatbotMain.getInput();
 		    	if(isTriggered(response)) {
 		    		questionCount = 0;
-		    		replyCount = 0;
+		    		replyCount = -2;
 		    		ChatbotMain.print("Ok lets talk some more");
 		    	}
 		    	else if(yonathan.isTriggered(response)) {
