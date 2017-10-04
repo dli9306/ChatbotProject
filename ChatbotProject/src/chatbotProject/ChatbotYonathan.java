@@ -76,7 +76,7 @@ public class ChatbotYonathan implements Topic {
 		int psn = 0;
 		while(psn<s.length()) {
 			  int leftside = 0;
-			  // makes a substring that is checked against every item in alhabetsoup
+			  // makes a substring that is  checked against every item in alhabetsoup
 			  boolean cRight = false;
 			  while(cRight == false) {
 				  if(s.substring(psn,psn+1).equals(" ")) {
