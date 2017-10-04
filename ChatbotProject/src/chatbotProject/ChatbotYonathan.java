@@ -71,28 +71,34 @@ public class ChatbotYonathan implements Topic {
 		return output;
 	}// convert key word is isolated to method that finds words isolated by spaces or edges
 	
-	public static boolean wordIsIsolated(int psn, String keyword, String s){
-		  boolean cLeft = false;
-		  boolean cRight = false;
-		  if(psn == 0)
-		  {
-			  cLeft = true;
-		  }
-		  else
-		  {
-			  if(s.substring(psn-1,psn).compareTo("a")<0)
-			  {
-				 cLeft = true;
+	public static String isolateLetters(String s){
+		String word = ""; 
+		int psn = 0;
+		while(psn<s.length()) {
+			  int leftside = 0;
+			  // makes a substring that is checked against every item in alhabetsoup
+			  boolean cRight = false;
+			  while(cRight == false) {
+				  if(s.substring(psn,psn+1).equals(" ")) {
+						word += " ";
+						psn++;
+					}
+			  	if(psn == s.length()-1)
+			  	{
+				  cRight = true;
+			  	}
+			  	else if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
+			  	{
+			  		psn++;
+				  cRight = true;
+			  	}else {
+			  		if(s.substring(psn+1,psn+2).equals(" "))
+			  		{
+			  			cRight = true;
+			  		}
+			  	}
 			  }
 		  }
-		  if(psn+ keyword.length() == s.length())
-		  {
-			  cRight = true;
-		  }
-		  else if(s.substring(psn+keyword.length(),psn+keyword.length()+1).compareTo("a")<0)
-		  {
-			  cRight = true;
-		  }
-	         return cRight && cLeft;
+	         return word;
 	}
 }
