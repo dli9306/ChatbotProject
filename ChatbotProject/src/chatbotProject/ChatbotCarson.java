@@ -114,7 +114,11 @@ public class ChatbotCarson implements Topic{
 		 		ChatbotMain.print("Have you forgotten who made this plan!");
 		 	}
 		}else if(questionChoice == 4) {
-			if(response.toLowerCase().contains("unlock")) {
+			if(response.toLowerCase().contains("boat")) {
+				ChatbotMain.print("Ah yes, the final step. Once we step foot on that boat they won't be able to find us.");
+			}else {
+				ChatbotMain.print("You know we are on an island right? Do you expect to swim to freedom?");
+			}
 		}
 	}
 	
