@@ -53,6 +53,7 @@ public class ChatbotYonathan implements Topic {
 			if(index>=0) {
 			output+= alphabetsoup[index] + " ";
 			}else {
+				System.err.println(input.charAt(i));
 				output+= "?";
 			}
 			i++;
