@@ -55,19 +55,9 @@ public class ChatbotYonathan implements Topic {
 		}
 		return output;
 	}
-	public static String decoder(String input) {
-		int i = 0;
-		String output ="";
-		while(input.length()>i) {
-			// find which index is equal to the first word of the code which will be marked by a space
-			
-			output+= alphabet.charAt(index) + " ";
-			i++;
-		}
-		return output;
-	}// convert key word is isolated to method that finds words isolated by spaces or edges
 	
-	public static String isolateLetters(String s){
+	
+	public static String decoder(String s){
 		String word = ""; 
 		int psn = 0;
 		 int leftside = 0;
