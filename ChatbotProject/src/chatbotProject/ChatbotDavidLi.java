@@ -47,8 +47,6 @@ public class ChatbotDavidLi implements Topic {
 	@Override
 	public void startChatting(String response) {
 		ChatbotMain.print("So lets get started what do you want to ask");
-		ChatbotMain.print(encoder("So lets get started what do you want to ask"));
-		ChatbotMain.print(isolateLetters(encoder("So lets get started what do you want to ask")));
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
