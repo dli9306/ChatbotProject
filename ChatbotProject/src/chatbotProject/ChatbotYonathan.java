@@ -60,11 +60,7 @@ public class ChatbotYonathan implements Topic {
 		String output ="";
 		while(input.length()>i) {
 			// find which index is equal to the first word of the code which will be marked by a space
-			for(int o = 0;o<27;o++) {
-				if() {
-					
-				}
-			}
+			
 			output+= alphabet.charAt(index) + " ";
 			i++;
 		}
@@ -74,31 +70,47 @@ public class ChatbotYonathan implements Topic {
 	public static String isolateLetters(String s){
 		String word = ""; 
 		int psn = 0;
+		 int leftside = 0;
 		while(psn<s.length()) {
-			  int leftside = 0;
+			 
 			  // makes a substring that is  checked against every item in alhabetsoup
-			  boolean cRight = false;
-			  while(cRight == false) {
+			  
+			  
 				  if(s.substring(psn,psn+1).equals(" ")) {
 						word += " ";
 						psn++;
-					}
+						leftside = psn;
+						
+					}else {
 			  	if(psn == s.length()-1)
 			  	{
-				  cRight = true;
+			  		word+=converter(s.substring(leftside,psn+1));
+			  		psn+=2;
+			  		leftside = psn;
+				  
 			  	}
 			  	else if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
 			  	{
 			  		psn++;
-				  cRight = true;
+				  
 			  	}else {
 			  		if(s.substring(psn+1,psn+2).equals(" "))
 			  		{
-			  			cRight = true;
+			  			word+=converter(s.substring(leftside,psn+1));
+				  		psn+=2;
+				  		leftside = psn;
 			  		}
 			  	}
 			  }
-		  }
-	         return word;
+		  
+	       
+	}  return word;
+	}
+	public static String converter(String letter) {
+		for(int o = 0;o<27;o++) {
+			if(letter == alphabetsoup[o]) {
+				return alphabet.substring(o,o+1);
+			}
+		} return "error"; 
 	}
 }
