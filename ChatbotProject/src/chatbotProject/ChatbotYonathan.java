@@ -50,7 +50,11 @@ public class ChatbotYonathan implements Topic {
 		String output ="";
 		while(input.length()>i) {
 			int index = alphabet.indexOf(input.charAt(i));
+			if(index>=0) {
 			output+= alphabetsoup[index] + " ";
+			}else {
+				output+= "?";
+			}
 			i++;
 		}
 		return output;
