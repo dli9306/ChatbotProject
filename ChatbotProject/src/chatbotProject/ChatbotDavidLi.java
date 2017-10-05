@@ -7,16 +7,17 @@ public class ChatbotDavidLi implements Topic {
 	private String [] replies = {"Ah, I see!","How interesting!","Hmmmmmm...","Ok","Oh really?"};
 	private String [] randQuestions = {"So how did you get here?","What happened to you?","How do you feel?","Do you have family around?","What did you do before you were sent here?","What do you think of this place so far?"};
 	private String [] sadWords = {"bad","terrible","awful","sad","sadly"};
-	private String [] happyWords = {"good","great","fine","okay","happily","fun"};
+	private String [] happyWords = {"good","great","fine","okay","happily","fun","aweseome"};
 	private String [] sadReplies = {"Sad to hear","Sorry to hear that"};
 	private String [] happyReplies = {"Good to hear","That's great!"};
-	private String [] insultWords = {"terrible","stupid","horrible","disgusting","bad","terrifying"};
+	private String [] insultWords = {"terrible","stupid","horrible","disgusting","bad","terrifying","awful"};
 	private String [] insultReplies = {"WHAT DO YOU MEAN I WAS","WHY WOULD YOU SAY I WAS"};
 	private String [] endWords;
+	private String insultW; //word used by user that insulted chatbot
 	private int questionCount = 0;
 	private int replyCount = -1;
 	private boolean chatting;
-	private boolean insulted;
+	private boolean insulted; //if chatbot was insulted
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
     public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
@@ -46,6 +47,8 @@ public class ChatbotDavidLi implements Topic {
 	@Override
 	public void startChatting(String response) {
 		ChatbotMain.print("So lets get started what do you want to ask");
+		ChatbotMain.print(encoder("So lets get started what do you want to ask"));
+		ChatbotMain.print(isolateLetters(encoder("So lets get started what do you want to ask")));
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
@@ -67,6 +70,7 @@ public class ChatbotDavidLi implements Topic {
 	
 	private void convoResponse(String response)
 	{
+		//keep track of amount of questions asked by users
 		 if(questionCount <5) {
 			 questionCount++;
 			 replyResponse(response);
@@ -83,6 +87,7 @@ public class ChatbotDavidLi implements Topic {
 	
 	private void convoQuestion(String response)
 	{
+		//keeps track of questions asked by chatbot
 	    if(replyCount == 0)
         {
       	   askQuestions();
@@ -118,6 +123,7 @@ public class ChatbotDavidLi implements Topic {
 
 
 		private void replyResponse(String response) {
+			//response to User's questions
 			  if(response.toLowerCase().contains("who")) {
 				  ChatbotMain.print(answers[0]);
 			  }
@@ -140,6 +146,7 @@ public class ChatbotDavidLi implements Topic {
 			 
 		 }
 		 private void replyResponse2(String response) {
+			 //chatbot's response to user's questions
 			 int randReplies =  (int) (Math.random() * replies.length + 0);
 			 int randNumber = (int) (Math.random()*2 +0);
 			 boolean notSad = true;
@@ -161,6 +168,7 @@ public class ChatbotDavidLi implements Topic {
 		
 	       }
 		 private void replyResponse3(String response) {
+			 //chatbot's response to what user thinks of him
 			 insulted = false;
 			 int randReplies =  (int) (Math.random() * insultReplies.length + 0);
 			 int randNumber2 = (int)(Math.random()*2+0);
@@ -168,10 +176,14 @@ public class ChatbotDavidLi implements Topic {
 			 {
 				 if(ChatbotMain.findKeyWord(response.toLowerCase(), insultWords[i], 0) >= 0) {
 					 ChatbotMain.print(insultReplies[randReplies] + " " +insultWords[i].toUpperCase());
-					 insulted = true;
+					 insultW = insultWords[i];
+					 insulted = true; //chatbot is insulted
 				 }
+				 else {
 				 if(ChatbotMain.findKeyWord(response.toLowerCase(), happyWords[i], 0) >= 0) {
 					 ChatbotMain.print(happyReplies[randNumber2]);
+					 
+				 }
 				 }
 			 }
 			 
@@ -179,6 +191,7 @@ public class ChatbotDavidLi implements Topic {
 		 }
 		
 		 private void askQuestions(){
+			 //random generator for questions for chatbot to ask
 			 String[] randQ = randQuestions;
 			 int randQues =  (int) (Math.random() * randQuestions.length + 0);
 			  while(randQuestions[randQues] == " ")
@@ -192,8 +205,9 @@ public class ChatbotDavidLi implements Topic {
 
 		 private void changeTopic()
 		 {
+			 //changes topic at the end of the conversation
 			 if(insulted) {
-				 ChatbotMain.print("Whatever man I don't care what you say about me, you're nobody! Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
+				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you're nobody! Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
 			 }
 			 else
 			 {
@@ -229,6 +243,55 @@ public class ChatbotDavidLi implements Topic {
 					i++;
 				}
 				return output;
+			}
+			public static String isolateLetters(String s){
+				String word = ""; 
+				int psn = 0;
+				 int leftside = 0;
+				while(psn<s.length()) {
+					 
+					  // makes a substring that is  checked against every item in alhabetsoup
+					  
+					  
+						  if(s.substring(psn,psn+1).equals(" ")) {
+								word += " ";
+								psn++;
+								leftside = psn;
+								
+							}else {
+					  	if(psn == s.length()-1)
+					  	{
+					  		word+=converter(s.substring(leftside,psn+1));
+					  		psn+=2;
+					  		leftside = psn;
+						  
+					  	}
+					  	else {
+					  		if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
+					  	{
+					  		psn++;
+						  
+					  	}else {
+					  		if(s.substring(psn+1,psn+2).equals(" "))
+					  		{
+					  			word+=converter(s.substring(leftside,psn+1));
+						  		psn+=2;
+						  		leftside = psn;
+					  		}
+					  	}
+						}
+					  }
+				  
+			       
+			}  return word;
+			}
+			public static String converter(String letter) {
+				String output = "";
+				for(int o = 0;o<27;o++) {
+					if(letter.equals(alphabetsoup[o])) {
+						output+= alphabet.substring(o,o+1);
+					}
+				} return output; 
 			}
 
 }
