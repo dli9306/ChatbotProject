@@ -3,7 +3,7 @@ package chatbotProject;
 public class ChatbotCarson implements Topic{
 	
 	private String[] keywords;
-	private String[] answers = {"The first step of the plan is to grab the keys off the guards belt when he walk over here.", "I need to leave because I am innocent", "After that unlock me from my cell.", "Walk down the hallway and take the second right, there will be a dead end. Remove the bottom four stones from the wall. From there we will take the tunnel to outside of the walls.", "Then we will steal one of the prison guard's boats and row ourselves to freedom.", "If we get caught then thats it for you and I. They will likely hang us for attempting to escape."};
+	private String[] answers = {"The first step of the plan is to grab the keys off the guards belt when he walk over here.", "I need to escape because I am innocent", "After that unlock me from my cell.", "Walk down the hallway and take the second right, there will be a dead end. Remove the bottom four stones from the wall. From there we will take the tunnel to outside of the walls.", "Then we will steal one of the prison guard's boats and row ourselves to freedom.", "If we get caught then thats it for you and I. They will likely hang us for attempting to escape."};
 	private String [] rndQuestions = {"Would you like to hear the plan again?", "Tell me, what is the 1st step of the plan?", "Tell me, what is the 2nd step of the plan?", "Tell me, what is the 3rd step of the plan?", "Tell me, so you don't forget, what is the 4th step of the plan?"};
 	private String [] endWords;
 	private String secretWord;
@@ -18,7 +18,7 @@ public class ChatbotCarson implements Topic{
 		keywords = temp;
 		String[] temp2 = {"done","bye","goodbye", "farewell"};
 		endWords = temp2;
-		secretWord = "escape";
+		secretWord = "apple";
 	}
 	
 	public boolean isTriggered(String response) {
@@ -31,29 +31,25 @@ public class ChatbotCarson implements Topic{
 	}
 
 	public void startChatting(String response) {
-		ChatbotMain.print("So lets get started, what do you wish to know?");
+		replyResponse();
 		chatting = true;
 		while(chatting) {
 			response = ChatbotMain.getInput();
-			if(questionCount <= 5) {
+			if(questionCount <= 4) {
 				replyResponse();
 				questionCount++;
 			}else {
-				if(replyCount <= 5) {
-					ChatbotMain.print("Enough about me, I'm going to ask you a few questions now");
+				if(replyCount <= 4) {
+					ChatbotMain.print("Enough about me, I'm going to ask you a few questions to make sure you were paying attention.");
 					askQuestions();
 					replyCount++;
 				}
 			}
 			for(int i = 0; i < endWords.length; i++) {
-				if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
+				if(ChatbotMain.findKeyWord(response.toLowerCase(), endWords[i], 0) >= 0) {
 					chatting = false;
+					ChatbotMain.print("Alright,I'll talk to you later I guess");
 					ChatbotMain.chatbot.startTalking();
-				}else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
-					ChatbotMain.print("You guessed my favorite thing. We are friends now.");
-					replyResponse();
-				}else {
-					ChatbotMain.print("HUH, I don't really know how to answer that, can you rephrase?");
 				}
 			}
 		}
@@ -109,45 +105,38 @@ public class ChatbotCarson implements Topic{
 			 }
 		 }else if(questionChoice == 3) {
 			 if(response.toLowerCase().contains("unlock")) {
-			 	ChatbotMain.print("I'd have been very angry if you forgot this step.");
+			 	ChatbotMain.print("Good, I'd have been very angry if you forgot this step.");
 		 	}else {
 		 		ChatbotMain.print("Have you forgotten who made this plan!");
 		 	}
 		}else if(questionChoice == 4) {
 			if(response.toLowerCase().contains("boat")) {
-				ChatbotMain.print("Ah yes, the final step. Once we step foot on that boat they won't be able to find us.");
+				ChatbotMain.print("Ah yes, the final step. Once we step foot on that boat they'll never be able to find us.");
 			}else {
-				ChatbotMain.print("You know we are on an island right? Do you expect to swim to freedom?");
+				ChatbotMain.print("The roads near this prison are heavily infested with guards, the boat is the safest way of travel.");
 			}
 		}
 	}
 	
 	private void replyResponse() {
-		ChatbotMain.print("Any questions about the escape plan?");
+		if(replyCount == 0) {
+			ChatbotMain.print("Any questions about my escape plan?");
+		}else {
+			ChatbotMain.print("Any other questions about our escape?");
+		}
 		String response = ChatbotMain.getInput();
 		if(response.toLowerCase().contains("how") && response.toLowerCase().contains("escape")) {
-			stopRepetitions("Are your nerves getting to you?", "Do I really need to repeat myself?");
 			ChatbotMain.print(answers[0]);
+			replyCount++;
 		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
-			stopRepetitions("Sorry, I think you just said that.", "It doesn't seem that complicated.");
 			ChatbotMain.print(answers[1]);
+			replyCount++;
 		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")) {
-			stopRepetitions("You must be pretty nervous with how much you stutter.", "If you mess this plan up because you can't remember it, I will find you and you will suffer the consequences.");
 			ChatbotMain.print(answers[4]);
+			replyCount++;
 		}else if(response.toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
-			stopRepetitions("You must be pretty nervous with how much you stutter.", "If you mess this plan up because you can't remember it, I will find you and you will suffer the consequences.");
-			ChatbotMain.print(answers[6]);
+			ChatbotMain.print(answers[5]);
+			replyCount++;
 		}
-	}
-	
-	public static String encoder(String input){
-		int i = 0;
-		String output ="";
-		while(input.length()>i) {
-			int index = alphabet.indexOf(input.toLowerCase().charAt(i));
-			output+= alphabetsoup[index] + " ";
-			i++;
-		}
-		return output;
 	}
 }
