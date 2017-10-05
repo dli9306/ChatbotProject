@@ -89,7 +89,8 @@ public class ChatbotYonathan implements Topic {
 			  		leftside = psn;
 				  
 			  	}
-			  	else if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
+			  	else {
+			  		if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
 			  	{
 			  		psn++;
 				  
@@ -101,16 +102,18 @@ public class ChatbotYonathan implements Topic {
 				  		leftside = psn;
 			  		}
 			  	}
+				}
 			  }
 		  
 	       
 	}  return word;
 	}
 	public static String converter(String letter) {
+		String output = "";
 		for(int o = 0;o<27;o++) {
-			if(letter == alphabetsoup[o]) {
-				return alphabet.substring(o,o+1);
+			if(letter.equals(alphabetsoup[o])) {
+				output+= alphabet.substring(o,o+1);
 			}
-		} return "error"; 
+		} return output; 
 	}
 }
