@@ -47,6 +47,9 @@ public class ChatbotDavidLi implements Topic {
 	@Override
 	public void startChatting(String response) {
 		ChatbotMain.print("So lets get started what do you want to ask");
+		String encoded = ChatbotYonathan.encoder("So lets get started what do you want to ask");
+		ChatbotMain.print(encoded);
+		ChatbotMain.print(isolateLetters(encoded));
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
@@ -203,6 +206,12 @@ public class ChatbotDavidLi implements Topic {
 
 		 private void changeTopic()
 		 {
+			/* Topic david = ChatbotMain.chatbot.getDavid();
+			 if(david.isTriggered(response)) {
+					chatting = false;
+					david.startChatting(response);
+				}
+         */ // how to acess another person's code
 			 //changes topic at the end of the conversation
 			 if(insulted) {
 				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you're nobody! Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
