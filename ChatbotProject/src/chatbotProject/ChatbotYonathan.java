@@ -50,7 +50,12 @@ public class ChatbotYonathan implements Topic {
 		String output ="";
 		while(input.length()>i) {
 			int index = alphabet.indexOf(input.charAt(i));
+			if(index>=0) {
 			output+= alphabetsoup[index] + " ";
+			}else {
+				System.err.println(input.charAt(i));
+				output+= "?";
+			}
 			i++;
 		}
 		return output;
@@ -63,7 +68,7 @@ public class ChatbotYonathan implements Topic {
 		 int leftside = 0;
 		while(psn<s.length()) {
 			 
-			  // makes a substring that is  checked against every item in alhabetsoup
+			  // makes a substri ng that is  checked against every item in alhabetsoup
 			  
 			  
 				  if(s.substring(psn,psn+1).equals(" ")) {
