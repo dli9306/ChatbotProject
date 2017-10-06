@@ -3,13 +3,13 @@ package chatbotProject;
 public class ChatbotDavidLi implements Topic {
 	
 	private String[] keywords;
-	private String[] answers= {"I am the Duke of Turing, Nice to meet you!","We are located in a prison on the coast of Europe.","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","500 days","Fine at the moment","I previously livedi in France"};
-	private String [] replies = {"Ah, I see!","How interesting!","Hmmmmmm...","Ok","Oh really?"};
-	private String [] randQuestions = {"So how did you get here?","What happened to you?","How do you feel?","Do you have family around?","What did you do before you were sent here?","What do you think of this place so far?"};
+	private String[] answers= {"I am the Duke of Turing Nice to meet you","We are located in a prison on the coast of Europe.","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","500 days","Fine at the moment","I previously lived in France"};
+	private String [] replies = {"Ah  I see","How interesting","Hmmmmmm","Ok","Oh really"};
+	private String [] randQuestions = {"So how did you get here","What happened to you","How do you feel","Do you have family around","What did you do before you were sent here?","What do you think of this place so far"};
 	private String [] sadWords = {"bad","terrible","awful","sad","sadly"};
 	private String [] happyWords = {"good","great","fine","okay","happily","fun","aweseome"};
 	private String [] sadReplies = {"Sad to hear","Sorry to hear that"};
-	private String [] happyReplies = {"Good to hear","That's great!"};
+	private String [] happyReplies = {"Good to hear","That is great"};
 	private String [] insultWords = {"terrible","stupid","horrible","disgusting","bad","terrifying","awful"};
 	private String [] insultReplies = {"WHAT DO YOU MEAN I WAS","WHY WOULD YOU SAY I WAS"};
 	private String [] endWords;
@@ -20,8 +20,6 @@ public class ChatbotDavidLi implements Topic {
 	private boolean insulted; //if chatbot was insulted
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
-    public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
-	public static String alphabet ="abcdefghijklmnopqrstuvwxyz ";
     
 
 	public ChatbotDavidLi() {
@@ -49,26 +47,42 @@ public class ChatbotDavidLi implements Topic {
 		ChatbotMain.print("So lets get started what do you want to ask");
 		String encoded = ChatbotYonathan.encoder("So lets get started what do you want to ask");
 		ChatbotMain.print(encoded);
-		ChatbotMain.print(isolateLetters(encoded));
+		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
+				 if(checkBye(response)) {
 				 convoResponse(response);
 				 convoQuestion(response);
-
-				  for(int i =0;i<endWords.length;i++) 
+				 }
+				/* for(int i =0;i<endWords.length;i++) 
 				  {
-					  if(ChatbotMain.findKeyWord(response.toLowerCase(), endWords[i], 0) >= 0) {
+					  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
 					  chatting = false;
-					  ChatbotMain.print("Alright,I'll talk to you later I guess");
+					  ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
 					  ChatbotMain.chatbot.startTalking();
 					  }   
 
 				  
 				 }
+				 */
 		 	}
 		 }
 	
+	private boolean checkBye(String response) {
+		  for(int i =0;i<endWords.length;i++) 
+		  {
+			  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
+			  chatting = false;
+			  ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
+			  ChatbotMain.chatbot.startTalking();
+			  return false;
+			  }   
+        
+		  
+		 }
+		  return true;
+	}
 	private void convoResponse(String response)
 	{
 		//keep track of amount of questions asked by users
@@ -79,7 +93,7 @@ public class ChatbotDavidLi implements Topic {
 		 }
 		 if(questionCount == 5)
 		 {
-			    System.out.println("But thats enough about me, I'm going to ask you a few questions now");
+			    System.out.println(ChatbotYonathan.encoder("But thats enough about me I am going to ask you a few questions now"));
 			    questionCount++;
 			    replyCount++;
 		  }
@@ -107,7 +121,7 @@ public class ChatbotDavidLi implements Topic {
       	  else { 
       		  	 if(replyCount == 5)
       		  	 {
-      		  		ChatbotMain.print("Ok, seems we have talked for quite a bit now, So what do you think of me so far?");
+      		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok  seems we have talked for quite a bit now  So what do you think of me so far"));
       		  		replyCount++;
       		  	 }
       		  	 else
@@ -128,7 +142,7 @@ public class ChatbotDavidLi implements Topic {
 			  if(response.toLowerCase().contains("who")) {
 				  ChatbotMain.print(answers[0]);
 			  }
-			  else if(response.toLowerCase().contains("where")) {
+			  else if(ChatbotYonathan.decoder(response).contains("where")) {
 				  ChatbotMain.print(answers[1]);
 			  } else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
 				  ChatbotMain.print(answers[2]);
@@ -141,7 +155,7 @@ public class ChatbotDavidLi implements Topic {
 			  }else if(response.toLowerCase().contains("where") && response.toLowerCase().contains("live") ) {
 	            ChatbotMain.print(answers[6]);
 			  }else {
-				ChatbotMain.print("I'm afraid I can't answer that nor can I understand it,You can ask another question if you'd like");
+				ChatbotMain.print(ChatbotYonathan.encoder("I am afraid I cannot answer that nor can I understand it You can ask another question if you would like"));
 			  }
 			  
 			 
@@ -241,64 +255,6 @@ public class ChatbotDavidLi implements Topic {
 		    	}
 		    	
 		 }
-			public static String encoder(String input){
-				int i = 0;
-				String output ="";
-				while(input.length()>i) {
-					int index = alphabet.indexOf(input.toLowerCase().charAt(i));
-					output+= alphabetsoup[index] + " ";
-					i++;
-				}
-				return output;
-			}
-			public static String isolateLetters(String s){
-				String word = ""; 
-				int psn = 0;
-				 int leftside = 0;
-				while(psn<s.length()) {
-					 
-					  // makes a substring that is  checked against every item in alhabetsoup
-					  
-					  
-						  if(s.substring(psn,psn+1).equals(" ")) {
-								word += " ";
-								psn++;
-								leftside = psn;
-								
-							}else {
-					  	if(psn == s.length()-1)
-					  	{
-					  		word+=converter(s.substring(leftside,psn+1));
-					  		psn+=2;
-					  		leftside = psn;
-						  
-					  	}
-					  	else {
-					  		if(s.substring(psn+1,psn+2).equals("0")||s.substring(psn+1,psn+2).equals("1"))
-					  	{
-					  		psn++;
-						  
-					  	}else {
-					  		if(s.substring(psn+1,psn+2).equals(" "))
-					  		{
-					  			word+=converter(s.substring(leftside,psn+1));
-						  		psn+=2;
-						  		leftside = psn;
-					  		}
-					  	}
-						}
-					  }
-				  
-			       
-			}  return word;
-			}
-			public static String converter(String letter) {
-				String output = "";
-				for(int o = 0;o<27;o++) {
-					if(letter.equals(alphabetsoup[o])) {
-						output+= alphabet.substring(o,o+1);
-					}
-				} return output; 
-			}
+
 
 }
