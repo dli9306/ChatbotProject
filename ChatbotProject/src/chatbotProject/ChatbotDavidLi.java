@@ -227,7 +227,7 @@ public class ChatbotDavidLi implements Topic {
 					chatting = false;
 					david.startChatting(response);
 				}
-         */ // how to acess another person's code
+         */ // how to access another person's code
 			 //changes topic at the end of the conversation
 			 if(insulted) {
 				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you are a nobody Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
