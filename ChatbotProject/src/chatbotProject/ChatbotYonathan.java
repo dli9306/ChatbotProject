@@ -45,9 +45,11 @@ public class ChatbotYonathan implements Topic {
 			}
 		}
 	}
-	public static String encoder(String input){
+	public static String encoder(String in){
 		int i = 0;
 		String output ="";
+		String input = in;
+		input = input.toLowerCase();
 		while(input.length()>i) {
 			int index = alphabet.indexOf(input.charAt(i));
 			if(index>=0) {
