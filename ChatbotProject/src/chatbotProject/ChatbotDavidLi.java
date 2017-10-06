@@ -20,7 +20,8 @@ public class ChatbotDavidLi implements Topic {
 	private boolean insulted; //if chatbot was insulted
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
-    
+    // 1 1010 10 means bye
+    //
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions","ask","f"};
@@ -191,7 +192,7 @@ public class ChatbotDavidLi implements Topic {
 			 for(int i =0;i<insultWords.length;i++)
 			 {
 				 if(ChatbotMain.findKeyWord(response.toLowerCase(), insultWords[i], 0) >= 0) {
-					 ChatbotMain.print(insultReplies[randReplies] + " " +insultWords[i].toUpperCase());
+					 ChatbotMain.print(insultReplies[randReplies] + " " +insultWords[i].toUpperCase() + " You do realize that I am the only one you can talk to RIGHT");
 					 insultW = insultWords[i];
 					 insulted = true; //chatbot is insulted
 				 }
@@ -229,7 +230,7 @@ public class ChatbotDavidLi implements Topic {
          */ // how to acess another person's code
 			 //changes topic at the end of the conversation
 			 if(insulted) {
-				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you're nobody! Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
+				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you are a nobody Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
 			 }
 			 else
 			 {
