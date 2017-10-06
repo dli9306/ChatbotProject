@@ -81,6 +81,7 @@ public class ChatbotDavidLi implements Topic {
         
 		  
 		 }
+		  return true;
 
 	}
 	private void convoResponse(String response)
