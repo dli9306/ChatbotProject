@@ -3,7 +3,7 @@ package chatbotProject;
 public class ChatbotDavidLi implements Topic {
 	
 	private String[] keywords;
-	private String[] answers= {"I am the Duke of Turing Nice to meet you","We are located in a prison on the coast of Europe.","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","500 days","Fine at the moment","I previously lived in France"};
+	private String[] answers= {"I am the Duke of Turing Nice to meet you","We are located in a prison on the coast of Europe","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","five hundred days","Fine at the moment","I previously lived in France"};
 	private String [] replies = {"Ah  I see","How interesting","Hmmmmmm","Ok","Oh really"};
 	private String [] randQuestions = {"So how did you get here","What happened to you","How do you feel","Do you have family around","What did you do before you were sent here?","What do you think of this place so far"};
 	private String [] sadWords = {"bad","terrible","awful","sad","sadly"};
@@ -21,7 +21,7 @@ public class ChatbotDavidLi implements Topic {
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
     // 1 1010 10 means bye
-    //
+    //1000 001 10 0011 10
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions","ask","f"};
@@ -145,17 +145,17 @@ public class ChatbotDavidLi implements Topic {
 				  ChatbotMain.print(answers[0]);
 			  }
 			  else if(ChatbotYonathan.decoder(response).contains("where")) {
-				  ChatbotMain.print(answers[1]);
-			  } else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("here")) {
-				  ChatbotMain.print(answers[2]);
-			  }else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("caught") || response.toLowerCase().contains("what") && response.toLowerCase().contains("happened"))
-			  {	  ChatbotMain.print(answers[3]);
-			  }else if(response.toLowerCase().contains("how") && response.toLowerCase().contains("long")){
-			    ChatbotMain.print(answers[4]);
-			  }else if(response.toLowerCase().contains("feel")){
-			    ChatbotMain.print(answers[5]);
-			  }else if(response.toLowerCase().contains("where") && response.toLowerCase().contains("live") ) {
-	            ChatbotMain.print(answers[6]);
+				  ChatbotMain.print(ChatbotYonathan.encoder(answers[1]));
+			  } else if(ChatbotYonathan.decoder(response).contains("why") && ChatbotYonathan.decoder(response).contains("here")) {
+				  ChatbotMain.print(ChatbotYonathan.encoder(answers[2]));
+			  }else if(ChatbotYonathan.decoder(response).contains("how") && ChatbotYonathan.decoder(response).contains("caught") || ChatbotYonathan.decoder(response).contains("what") && ChatbotYonathan.decoder(response).contains("happened"))
+			  {	  ChatbotMain.print(ChatbotYonathan.encoder(answers[3]));
+			  }else if(ChatbotYonathan.decoder(response).contains("how") && ChatbotYonathan.decoder(response).contains("long")){
+			    ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
+			  }else if(ChatbotYonathan.decoder(response).contains("feel")){
+			    ChatbotMain.print(ChatbotYonathan.encoder(answers[5]));
+			  }else if(ChatbotYonathan.decoder(response).contains("where") && ChatbotYonathan.decoder(response).contains("live") ) {
+	            ChatbotMain.print(ChatbotYonathan.encoder(answers[6]));
 			  }else {
 				ChatbotMain.print(ChatbotYonathan.encoder("I am afraid I cannot answer that nor can I understand it You can ask another question if you would like"));
 			  }
@@ -170,17 +170,17 @@ public class ChatbotDavidLi implements Topic {
 			 boolean notHappy = true;
 			 for(int i =0;i<sadWords.length;i++)
 			 {
-				 if(ChatbotMain.findKeyWord(response.toLowerCase(), sadWords[i], 0) >= 0) {
-					 ChatbotMain.print(sadReplies[randNumber]);
+				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), sadWords[i], 0) >= 0) {
+					 ChatbotMain.print(ChatbotYonathan.encoder(sadReplies[randNumber]));
 					 notSad = false;
 				 }
-				 if(ChatbotMain.findKeyWord(response.toLowerCase(), happyWords[i], 0) >= 0) {
-					 ChatbotMain.print(happyReplies[randNumber]);
+				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), happyWords[i], 0) >= 0) {
+					 ChatbotMain.print(ChatbotYonathan.encoder(happyReplies[randNumber]));
 					 notHappy = false;
 				 }
 			 }
 			 if(notSad && notHappy) {
-			 ChatbotMain.print(replies[randReplies]);
+			 ChatbotMain.print(ChatbotYonathan.encoder(replies[randReplies]));
 			 }
 		
 	       }
@@ -191,14 +191,14 @@ public class ChatbotDavidLi implements Topic {
 			 int randNumber2 = (int)(Math.random()*2+0);
 			 for(int i =0;i<insultWords.length;i++)
 			 {
-				 if(ChatbotMain.findKeyWord(response.toLowerCase(), insultWords[i], 0) >= 0) {
-					 ChatbotMain.print(insultReplies[randReplies] + " " +insultWords[i].toUpperCase() + " You do realize that I am the only one you can talk to RIGHT");
+				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), insultWords[i], 0) >= 0) {
+					 ChatbotMain.print(ChatbotYonathan.encoder(insultReplies[randReplies]) + " " +ChatbotYonathan.encoder(insultWords[i].toUpperCase()) + ChatbotYonathan.encoder(" You do realize that I am the only one you can talk to RIGHT"));
 					 insultW = insultWords[i];
 					 insulted = true; //chatbot is insulted
 				 }
 				 else {
-				 if(ChatbotMain.findKeyWord(response.toLowerCase(), happyWords[i], 0) >= 0) {
-					 ChatbotMain.print(happyReplies[randNumber2]);
+				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), happyWords[i], 0) >= 0) {
+					 ChatbotMain.print(ChatbotYonathan.encoder(happyReplies[randNumber2]));
 					 
 				 }
 				 }
@@ -215,7 +215,7 @@ public class ChatbotDavidLi implements Topic {
 			  {
 				 randQues =  (int) (Math.random() * randQuestions.length + 0);
 			  }
-			 ChatbotMain.print(randQ[randQues]);
+			 ChatbotMain.print(ChatbotYonathan.encoder(randQ[randQues]));
 			 randQ[randQues] = " ";
 
 		 }
@@ -230,30 +230,30 @@ public class ChatbotDavidLi implements Topic {
          */ // how to access another person's code
 			 //changes topic at the end of the conversation
 			 if(insulted) {
-				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW + ", you are a nobody Does your little brain want to redo the code lesson or do you want to escape already? Not that I care");
+				 ChatbotMain.print(ChatbotYonathan.encoder("Whatever who cares if you think I'm ") + ChatbotYonathan.encoder(insultW) +ChatbotYonathan.encoder(" you are a nobody Does your little brain want to redo the code lesson or do you want to escape already? Not that I care"));
 			 }
 			 else
 			 {
-			    ChatbotMain.print("Do you want to be reminded on the code or do you want to escape this hole we're in? OR you just like me so much that you want to talk more for a bit?");
+			    ChatbotMain.print(ChatbotYonathan.encoder("Do you want to be reminded on the code or do you want to escape this hole we're in OR you just like me so much that you want to talk more for a bit"));
 			 }
 			 String response = ChatbotMain.getInput();
 		    	if(isTriggered(response)) {
 		    		questionCount = 0;
 		    		replyCount = -2;
-		    		ChatbotMain.print("Ok lets talk some more");
+		    		ChatbotMain.print(ChatbotYonathan.encoder("Ok lets talk some more"));
 		    	}
-		    	else if(yonathan.isTriggered(response)) {
+		    	else if(yonathan.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
-		    		yonathan.startChatting(response);
+		    		yonathan.startChatting(ChatbotYonathan.decoder(response));
 		    		
 		    	} 
-		    	else if(carson.isTriggered(response)) {
+		    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
-		    		carson.startChatting(response);
+		    		carson.startChatting(ChatbotYonathan.decoder(response));
 		    	}
 		    	else
 		    	{
-		    		ChatbotMain.print("I'm sorry, I dont understand ,maybe you could rephrase?");
+		    		ChatbotMain.print(ChatbotYonathan.encoder("I'm sorry, I dont understand ,maybe you could rephrase"));
 		    	}
 		    	
 		 }
