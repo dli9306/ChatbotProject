@@ -13,6 +13,8 @@ public class ChatbotDavidLi implements Topic {
 	private String [] insultWords = {"terrible","stupid","horrible","disgusting","bad","terrifying","awful"};
 	private String [] insultReplies = {"WHAT DO YOU MEAN I WAS","WHY WOULD YOU SAY I WAS"};
 	private String [] endWords;
+	private String [] wrongLetters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+	private String [] wrongNumbers = {"2","3","4","5","6","7","8","9"};
 	private String insultW; //word used by user that insulted chatbot
 	private int questionCount = 0;
 	private int replyCount = -1;
@@ -20,7 +22,7 @@ public class ChatbotDavidLi implements Topic {
 	private boolean insulted; //if chatbot was insulted
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
-    // 1 1010 10 means bye
+    //1 1010 10 means bye
     //1000 001 10 0011 10
 
 	public ChatbotDavidLi() {
@@ -52,11 +54,17 @@ public class ChatbotDavidLi implements Topic {
 		chatting = true;
 		 while(chatting) {
 				 response = ChatbotMain.getInput();
-				 if(checkBye(response)) {
+			if (checkNumber(response) || checkLetter(response))
+			{
+				ChatbotMain.print(ChatbotYonathan.encoder("What did you say Thats not part of the code man"));
+			}
+			else if(checkBye(response)) {
 				 convoResponse(response);
 				 convoQuestion(response);
 				 }
-				/* for(int i =0;i<endWords.length;i++) 
+				 else
+				 {
+				 for(int i =0;i<endWords.length;i++) 
 				  {
 					  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
 					  chatting = false;
@@ -65,12 +73,40 @@ public class ChatbotDavidLi implements Topic {
 					  }   
 
 				  
+				  }
 				 }
-				 */
+				 
 		 	}
 		 }
+    private boolean checkLetter(String response)
+    {
+      
+	  for(int i =0;i<wrongLetters.length;i++) 
+		  {
+			  if(response.toLowerCase().contains(wrongLetters[i])) {
+			  return true;
+			  }   
+      
+		  
+		 }
+		  return false;
+    }
+    private boolean checkNumber(String response)
+    {
+      
+	  for(int i =0;i<wrongNumbers.length;i++) 
+		  {
+			  if(response.contains(wrongNumbers[i])) {
+			  return true;
+			  }   
+      
+		  
+		 }
+		  return false;
+    }
 	
 	private boolean checkBye(String response) {
+		
 		  for(int i =0;i<endWords.length;i++) 
 		  {
 			  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
@@ -123,7 +159,7 @@ public class ChatbotDavidLi implements Topic {
       	  else { 
       		  	 if(replyCount == 5)
       		  	 {
-      		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok  seems we have talked for quite a bit now  So what do you think of me so far"));
+      		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok seems we have talked for quite a bit now  So what do you think of me so far"));
       		  		replyCount++;
       		  	 }
       		  	 else
@@ -141,7 +177,7 @@ public class ChatbotDavidLi implements Topic {
 
 		private void replyResponse(String response) {
 			//response to User's questions
-			  if(response.toLowerCase().contains("who")) {
+			   if(ChatbotYonathan.decoder(response).contains("who")) {
 				  ChatbotMain.print(answers[0]);
 			  }
 			  else if(ChatbotYonathan.decoder(response).contains("where")) {
@@ -179,10 +215,11 @@ public class ChatbotDavidLi implements Topic {
 					 notHappy = false;
 				 }
 			 }
+			 
 			 if(notSad && notHappy) {
 			 ChatbotMain.print(ChatbotYonathan.encoder(replies[randReplies]));
 			 }
-		
+			 
 	       }
 		 private void replyResponse3(String response) {
 			 //chatbot's response to what user thinks of him
@@ -234,7 +271,7 @@ public class ChatbotDavidLi implements Topic {
 			 }
 			 else
 			 {
-			    ChatbotMain.print(ChatbotYonathan.encoder("Do you want to be reminded on the code or do you want to escape this hole we're in OR you just like me so much that you want to talk more for a bit"));
+			    ChatbotMain.print(ChatbotYonathan.encoder("Do you want to be reminded on the code or do you want to escape this hole we are in OR you just like me so much that you want to talk more for a bit"));
 			 }
 			 String response = ChatbotMain.getInput();
 		    	if(isTriggered(response)) {
