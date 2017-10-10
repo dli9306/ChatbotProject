@@ -26,6 +26,7 @@ public class ChatbotDavidLi implements Topic {
     //1000 001 10 0011 10 = where 
     //0001 101 0 111 = plan
 	//1 0 01 = bad
+	//0 0100 100 = ask
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions","ask","f"};
@@ -127,9 +128,9 @@ public class ChatbotDavidLi implements Topic {
 	{
 		//keep track of amount of questions asked by users
 		 if(questionCount <5) {
-			 questionCount++;
 			 replyResponse(response);
-			 System.out.println(questionCount);
+			 questionCount++;
+			 //System.out.println(questionCount);
 		 }
 		 if(questionCount == 5)
 		 {
@@ -147,7 +148,7 @@ public class ChatbotDavidLi implements Topic {
         {
       	   askQuestions();
              replyCount++;
-             System.out.println(replyCount);
+             //System.out.println(replyCount);
         }
       else {
  
@@ -164,7 +165,7 @@ public class ChatbotDavidLi implements Topic {
       		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok seems we have talked for quite a bit now  So what do you think of me so far"));
       		  		ChatbotMain.print("question");
       		  		replyCount++;
-      		  	//System.out.println(replyCount);
+      		  	System.out.println(replyCount);
       		  	 }
       		  	 else
       		  	 {
@@ -173,7 +174,7 @@ public class ChatbotDavidLi implements Topic {
       		  		replyResponse3(response);
       		  		ChatbotMain.print("answer");
       		  	    replyCount++;
-      		  	    // System.out.println(replyCount);
+      		  	     //System.out.println(replyCount);
       		  		}
       		  			if(replyCount ==7) {
       		  				expressFeelings();
@@ -181,7 +182,7 @@ public class ChatbotDavidLi implements Topic {
       		  			//System.out.println(replyCount);
   			             }
       		  			if(replyCount == 8) {
-      		  				ChatbotMain.print("So what do you want to talk about");
+      		  				ChatbotMain.print(ChatbotYonathan.encoder("So what do you want to talk about"));
       		  			    changeTopic();
       		  				//System.out.println(replyCount);
       		  				}
@@ -275,18 +276,18 @@ public class ChatbotDavidLi implements Topic {
 				 randQues =  (int) (Math.random() * randQuestions.length + 0);
 			  }
 			 ChatbotMain.print(ChatbotYonathan.encoder(randQ[randQues]));
-			 randQ[randQues] = " ";
+			 //randQ[randQues] = " ";
 
 		 }
 
 		 private void changeTopic()
 		 {
 			 String response = ChatbotMain.getInput();
-			 ChatbotMain.print(ChatbotYonathan.decoder(response));
-		    	if(isTriggered(response)) {
+			 //ChatbotMain.print(ChatbotYonathan.decoder(response));
+		    	if(isTriggered(ChatbotYonathan.decoder(response))) {
 		    		questionCount = 0;
 		    		replyCount = -1;
-		    		ChatbotMain.print(ChatbotYonathan.encoder("Ok lets talk some more Ask me some questions"));
+		    		ChatbotMain.print("Ok lets talk some more Ask me some questions");
 		    	}
 		    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
