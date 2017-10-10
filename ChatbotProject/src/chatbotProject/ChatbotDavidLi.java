@@ -21,10 +21,11 @@ public class ChatbotDavidLi implements Topic {
 	private boolean chatting;
 	private boolean insulted; //if chatbot was insulted
 	private Topic carson = new ChatbotCarson();
-    private Topic yonathan = new ChatbotYonathan();
+   // private Topic yonathan = new ChatbotYonathan();
     //1 1010 10 means bye
     //1000 001 10 0011 10 = where 
-    //0001 101 0 1111
+    //0001 101 0 111 = plan
+	//1 0 01 = bad
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions","ask","f"};
@@ -48,9 +49,9 @@ public class ChatbotDavidLi implements Topic {
 
 	@Override
 	public void startChatting(String response) {
-		ChatbotMain.print("So lets get started what do you want to ask");
+		//ChatbotMain.print("So lets get started what do you want to ask");
 		String encoded = ChatbotYonathan.encoder("So lets get started what do you want to ask");
-		//ChatbotMain.print(encoded);
+		ChatbotMain.print(encoded);
 		//ChatbotMain.print(ChatbotYonathan.decoder(encoded));
 		chatting = true;
 		 while(chatting) {
@@ -155,25 +156,44 @@ public class ChatbotDavidLi implements Topic {
       		  replyResponse2(response);
       		  askQuestions();
       		  replyCount++;
-      		  System.out.println(replyCount);
+      		  //System.out.println(replyCount);
       	    }
       	  else { 
       		  	 if(replyCount == 5)
       		  	 {
       		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok seems we have talked for quite a bit now  So what do you think of me so far"));
+      		  		ChatbotMain.print("question");
       		  		replyCount++;
+      		  	//System.out.println(replyCount);
       		  	 }
       		  	 else
       		  	 {
-      		  		if(replyCount >5)
+      		  		if(replyCount == 6)
       		  		{
       		  		replyResponse3(response);
-      		  			changeTopic();
+      		  		ChatbotMain.print("answer");
+      		  	    replyCount++;
+      		  	    // System.out.println(replyCount);
+      		  		}
+      		  			if(replyCount ==7) {
+      		  				expressFeelings();
+      		  				replyCount++;
+      		  			//System.out.println(replyCount);
+  			             }
+      		  			if(replyCount == 8) {
+      		  				ChatbotMain.print("So what do you want to talk about");
+      		  			    changeTopic();
+      		  				//System.out.println(replyCount);
+      		  				}
+      		  			}
       		  		}
       		  	 }
-          	  }	
-         }
-	}
+      	  }
+      
+         
+      	  
+	
+
 
 
 		private void replyResponse(String response) {
@@ -219,6 +239,7 @@ public class ChatbotDavidLi implements Topic {
 			 
 			 if(notSad && notHappy) {
 			 ChatbotMain.print(ChatbotYonathan.encoder(replies[randReplies]));
+			 
 			 }
 			 
 	       }
@@ -230,7 +251,7 @@ public class ChatbotDavidLi implements Topic {
 			 for(int i =0;i<insultWords.length;i++)
 			 {
 				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), insultWords[i], 0) >= 0) {
-					 ChatbotMain.print(ChatbotYonathan.encoder(insultReplies[randReplies]) + " " +ChatbotYonathan.encoder(insultWords[i].toUpperCase()) + ChatbotYonathan.encoder(" You do realize that I am the only one you can talk to RIGHT"));
+					 ChatbotMain.print(ChatbotYonathan.encoder(insultReplies[randReplies]) + " " + ChatbotYonathan.encoder(insultWords[i]) + ChatbotYonathan.encoder(" You do realize that I am the only one you can talk to RIGHT"));
 					 insultW = insultWords[i];
 					 insulted = true; //chatbot is insulted
 				 }
@@ -260,32 +281,13 @@ public class ChatbotDavidLi implements Topic {
 
 		 private void changeTopic()
 		 {
-			/* Topic david = ChatbotMain.chatbot.getDavid();
-			 if(david.isTriggered(response)) {
-					chatting = false;
-					david.startChatting(response);
-				}
-         */ // how to access another person's code
-			 //changes topic at the end of the conversation
-			 if(insulted) {
-				 ChatbotMain.print(ChatbotYonathan.encoder("Whatever who cares if you think I'm ") + ChatbotYonathan.encoder(insultW) +ChatbotYonathan.encoder(" you are a nobody Does your little brain want to redo the code lesson or do you want to escape already? Not that I care"));
-			 }
-			 else
-			 {
-			    ChatbotMain.print(ChatbotYonathan.encoder("Now that you have learned more about me do you want to learn how to escape or ask me more questions"));
-			 }
 			 String response = ChatbotMain.getInput();
+			 ChatbotMain.print(ChatbotYonathan.decoder(response));
 		    	if(isTriggered(response)) {
 		    		questionCount = 0;
-		    		replyCount = -2;
-		    		ChatbotMain.print(ChatbotYonathan.encoder("Ok lets talk some more"));
+		    		replyCount = -1;
+		    		ChatbotMain.print(ChatbotYonathan.encoder("Ok lets talk some more Ask me some questions"));
 		    	}
-		    	/*else if(yonathan.isTriggered(ChatbotYonathan.decoder(response))) {
-		    		chatting = false;
-		    		yonathan.startChatting(ChatbotYonathan.decoder(response));
-		    		
-		    	} 
-		    	*/
 		    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
 		    		carson.startChatting(ChatbotYonathan.decoder(response));
@@ -293,9 +295,24 @@ public class ChatbotDavidLi implements Topic {
 		    	else
 		    	{
 		    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
+		    	/*	String encoded = ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase");
+		    		ChatbotMain.print(encoded);
+		    		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
+		    		*/
 		    	}
-		    	
+			 
+			 
 		 }
-
+       private void expressFeelings() {
+    	   if(insulted) {
+				 ChatbotMain.print(ChatbotYonathan.encoder("Whatever who cares if you think I'm ") + ChatbotYonathan.encoder(insultW) +ChatbotYonathan.encoder(" you are a nobody Does your little brain want to ask me more questions or do you want to escape already Not that I care"));
+				 //ChatbotMain.print("INSULTED");
+			     }
+			     else
+			     {
+			    ChatbotMain.print(ChatbotYonathan.encoder("Now that you have learned more about me do you want to learn how to escape or ask me more questions"));
+			   // ChatbotMain.print("NOT INSULTED");
+			     }
+       }
 
 }
