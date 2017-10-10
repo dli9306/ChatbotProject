@@ -45,8 +45,11 @@ public class Chatbot {
 
 
 	public void startTalking() {
-		ChatbotMain.print("Welcome to our chatbot! what is your name?");
+		ChatbotMain.print("hello are you awake whats your name");
 		userName = ChatbotMain.getInput();
+		ChatbotMain.print("ok " + userName + " if you want to talk when the guards are here then your going to have to learn this code" );
+		ChatbotMain.print("0 = a 1 = b 00 = c 01 = d 10 = e 11 = f 000 = g 001 = h");
+		ChatbotMain.print("i think i see a guard coming if you understand the code send me the word apple");
 		chatting = true;
 		while(chatting){
 			ChatbotMain.print("What do you want to talk about " + userName);

@@ -16,7 +16,6 @@ public class ChatbotYonathan implements Topic {
 		String[] temp = {"food","entertainment","Internet","video games"};
 		keywords = temp;
 		goodbyeWord = "bye";
-		secretWord = "pug";
 	}
 
 	@Override
@@ -31,17 +30,18 @@ public class ChatbotYonathan implements Topic {
 
 	@Override
 	public void startChatting(String response) {
+		
 		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
 		chatting = true;
 		while(chatting) {
-			response = ChatbotMain.getInput();
+			response = decoder(ChatbotMain.getInput());
+			if(response.equals("apple")) {
+				ChatbotMain.print("false alarm their wasnt a guard but great job here is the entire code");
+			}
 			if(ChatbotMain.findKeyWord(response, goodbyeWord, 	0) >= 0 ) {
 				chatting = false;
 				ChatbotMain.chatbot.startTalking();
-			}else if(ChatbotMain.findKeyWord(response, secretWord, 0) >= 0) {
-				ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
-			}else {
-				ChatbotMain.print("Huh. I don't really get you. Tell me something else?");
+			
 			}
 		}
 	}
@@ -110,6 +110,8 @@ public class ChatbotYonathan implements Topic {
 		for(int o = 0;o<27;o++) {
 			if(letter.equals(alphabetsoup[o])) {
 				output+= alphabet.substring(o,o+1);
+			}else {
+				output+= "?";
 			}
 		} return output; 
 	}
