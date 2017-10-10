@@ -5,16 +5,17 @@ import chatbotProject.ChatbotMain;
 
 public class ChatbotYonathan implements Topic {
 
-	private String[] keywords;
+	private String[] keywords = {"yes","yup","sure","y"};
 	private String goodbyeWord;
 	private String secretWord;
 	private boolean chatting;
 	public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
 	public static String alphabet ="abcdefghijklmnopqrstuvwxyz ";
-	
+	private Topic carson = new ChatbotCarson();
+    private Topic david = new ChatbotDavidLi();
 	public ChatbotYonathan() {
-		String[] temp = {"food","entertainment","Internet","video games"};
-		keywords = temp;
+	
+		
 		goodbyeWord = "bye";
 	}
 
@@ -31,18 +32,26 @@ public class ChatbotYonathan implements Topic {
 	@Override
 	public void startChatting(String response) {
 		
-		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
+		ChatbotMain.print("prisoners are not allowed to talk so if you want to talk then you need to learn this code");
+		ChatbotMain.print("a=0 b=1 c=00 d=01 e=10 f=11 g = 000 h= 001");
+		ChatbotMain.print("");
 		chatting = true;
 		while(chatting) {
 			response = decoder(ChatbotMain.getInput());
 			if(response.equals("apple")) {
 				ChatbotMain.print("false alarm their wasnt a guard but great job here is the entire code");
 			}
-			if(ChatbotMain.findKeyWord(response, goodbyeWord, 	0) >= 0 ) {
-				chatting = false;
-				ChatbotMain.chatbot.startTalking();
 			
-			}
+			if(david.isTriggered(ChatbotYonathan.decoder(response))) {
+	    		chatting = false;
+	    		david.startChatting(ChatbotYonathan.decoder(response));
+	    		
+	    	} 
+	    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
+	    		chatting = false;
+	    		carson.startChatting(ChatbotYonathan.decoder(response));
+	    	}
+			
 		}
 	}
 	public static String encoder(String in){
@@ -110,8 +119,6 @@ public class ChatbotYonathan implements Topic {
 		for(int o = 0;o<27;o++) {
 			if(letter.equals(alphabetsoup[o])) {
 				output+= alphabet.substring(o,o+1);
-			}else {
-				output+= "?";
 			}
 		} return output; 
 	}
