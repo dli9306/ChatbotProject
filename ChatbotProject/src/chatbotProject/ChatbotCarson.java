@@ -3,7 +3,7 @@ package chatbotProject;
 public class ChatbotCarson implements Topic{
 	
 	private String[] keywords;
-	private String[] answers = {"The first step of the plan is to grab the keys off the guards belt when he walk over here", "I need to escape because I am innocent", "After that unlock me from my cell", "Walk down the hallway and take the second right there will be a dead end Remove the bottom four stones from the wall From there we will take the tunnel to outside of the walls", "Then we will steal one of the prison guards boats and row ourselves to freedom", "If we get caught then thats it for you and I They will likely hang us for attempting to escape"};
+	private String[] answers = {"The first step of the plan is to grab the keys off the guards belt when he walks over here", "After that unlock me from my cell", "Walk down the hallway and take the second right", "There will be a dead end Remove the bottom four stones from the wall From there we will take the tunnel I dug to the outside of the walls",  "Then we will steal one of the prison guards boats and row ourselves to freedom","I need to escape because I am innocent", "If we get caught then thats it for you and I They will likely hang us for attempting to escape"};
 	private String [] rndQuestions = {"Would you like to hear the plan again", "Tell me what is the first step of the plan", "Tell me what is the second step of the plan", "Tell me, what is the third step of the plan", "Tell me so you dont forget, what is the fourth step of the plan"};
 	private String [] endWords;
 	private String secretWord;
@@ -33,11 +33,11 @@ public class ChatbotCarson implements Topic{
 		chatting = true;
 		while(chatting) {
 			response = ChatbotMain.getInput();
-			if(questionCount <= 4) {
+			if(questionCount <= 6) {
 				replyResponse();
 				questionCount++;
 			}else {
-				if(replyCount <= 4) {
+				if(replyCount <= 6) {
 					ChatbotMain.print("Enough about me Im going to ask you a few questions to make sure you were paying attention");
 					askQuestions();
 					replyCount++;
@@ -117,6 +117,18 @@ public class ChatbotCarson implements Topic{
 		}
 	}
 	
+	private void nextStep() {
+		String response = ChatbotMain.getInput();
+		int stepCount = 0;
+		if(response.toLowerCase().contains("next") && response.toLowerCase().contains("step") && stepCount < 5) {
+			ChatbotMain.print(answers[stepCount + 1]);
+			stepCount++;
+		}else if(response.toLowerCase().contains("previous") && response.toLowerCase().contains("step") && stepCount > 0) {
+			ChatbotMain.print(answers[stepCount - 1]);
+		}
+		
+	}
+	
 	private void replyResponse() {
 		if(replyCount == 0) {
 			ChatbotMain.print("Any questions about my escape plan");
@@ -124,19 +136,40 @@ public class ChatbotCarson implements Topic{
 			ChatbotMain.print("Any other questions about our escape");
 		}
 		String response = ChatbotMain.getInput();
+		
+		nextStep();
+		
 		if(response.toLowerCase().contains("how") && response.toLowerCase().contains("escape")) {
 			ChatbotMain.print(answers[0]);
 			replyCount++;
-		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
+		}else if(response.toLowerCase().contains("first") || response.toLowerCase().contains("1st")) {
+			ChatbotMain.print(answers[0]);
+			replyCount++;
+		}else if(response.toLowerCase().contains("second") || response.toLowerCase().contains("2nd")) {
 			ChatbotMain.print(answers[1]);
+			replyCount++;
+		}else if(response.toLowerCase().contains("third") || response.toLowerCase().contains("3rd")) {
+			ChatbotMain.print(answers[2]);
+			replyCount++;
+		}else if(response.toLowerCase().contains("fourth") || response.toLowerCase().contains("4th")) {
+			ChatbotMain.print(answers[3]);
+			replyCount++;
+		}else if(response.toLowerCase().contains("fith") || response.toLowerCase().contains("5th")) {
+			ChatbotMain.print(answers[4]);
+			replyCount++;
+		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
+			ChatbotMain.print(answers[5]);
 			replyCount++;
 		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")){
 			ChatbotMain.print(answers[4]);
 			replyCount++;
 		}else if(response.toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
-			ChatbotMain.print(answers[5]);
+			ChatbotMain.print(answers[6]);
 			replyCount++;
+		}else {
+			ChatbotMain.print("Sorry, im not sure I understand, try asking me about specific steps of the plan though." + "\n" + "You can also ask about previous or next steps of my plan.");
+			replyResponse();
 		}
+		ChatbotMain.print("a" + replyCount);
 	}
 }
-
