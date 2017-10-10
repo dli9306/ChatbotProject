@@ -5,7 +5,7 @@ public class ChatbotDavidLi implements Topic {
 	private String[] keywords;
 	private String[] answers= {"I am the Duke of Turing Nice to meet you","We are located in a prison on the coast of Europe","I was framed for the murder of my wife","Guards broken into my house and immeditaely captured me","five hundred days","Fine at the moment","I previously lived in France"};
 	private String [] replies = {"Ah  I see","How interesting","Hmmmmmm","Ok","Oh really"};
-	private String [] randQuestions = {"So how did you get here","What happened to you","How do you feel","Do you have family around","What did you do before you were sent here?","What do you think of this place so far"};
+	private String [] randQuestions = {"So how did you get here","What happened to you","How do you feel","Do you have family around","What did you do before you were sent here","What do you think of this place so far"};
 	private String [] sadWords = {"bad","terrible","awful","sad","sadly"};
 	private String [] happyWords = {"good","great","fine","okay","happily","fun","aweseome"};
 	private String [] sadReplies = {"Sad to hear","Sorry to hear that"};
@@ -23,7 +23,8 @@ public class ChatbotDavidLi implements Topic {
 	private Topic carson = new ChatbotCarson();
     private Topic yonathan = new ChatbotYonathan();
     //1 1010 10 means bye
-    //1000 001 10 0011 10
+    //1000 001 10 0011 10 = where 
+    //0001 101 0 1111
 
 	public ChatbotDavidLi() {
 		String[] temp = {"question","questions","ask","f"};
@@ -49,14 +50,14 @@ public class ChatbotDavidLi implements Topic {
 	public void startChatting(String response) {
 		ChatbotMain.print("So lets get started what do you want to ask");
 		String encoded = ChatbotYonathan.encoder("So lets get started what do you want to ask");
-		ChatbotMain.print(encoded);
-		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
+		//ChatbotMain.print(encoded);
+		//ChatbotMain.print(ChatbotYonathan.decoder(encoded));
 		chatting = true;
 		 while(chatting) {
-				 response = ChatbotMain.getInput();
+		    response = ChatbotMain.getInput();
 			if (checkNumber(response) || checkLetter(response))
 			{
-				ChatbotMain.print(ChatbotYonathan.encoder("What did you say Thats not part of the code man"));
+				ChatbotMain.print(ChatbotYonathan.encoder("Wrong use of code"));
 			}
 			else if(checkBye(response)) {
 				 convoResponse(response);
@@ -271,7 +272,7 @@ public class ChatbotDavidLi implements Topic {
 			 }
 			 else
 			 {
-			    ChatbotMain.print(ChatbotYonathan.encoder("Do you want to be reminded on the code or do you want to escape this hole we are in OR you just like me so much that you want to talk more for a bit"));
+			    ChatbotMain.print(ChatbotYonathan.encoder("Now that you have learned more about me do you want to learn how to escape or ask me more questions"));
 			 }
 			 String response = ChatbotMain.getInput();
 		    	if(isTriggered(response)) {
@@ -279,18 +280,19 @@ public class ChatbotDavidLi implements Topic {
 		    		replyCount = -2;
 		    		ChatbotMain.print(ChatbotYonathan.encoder("Ok lets talk some more"));
 		    	}
-		    	else if(yonathan.isTriggered(ChatbotYonathan.decoder(response))) {
+		    	/*else if(yonathan.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
 		    		yonathan.startChatting(ChatbotYonathan.decoder(response));
 		    		
 		    	} 
+		    	*/
 		    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
 		    		chatting = false;
 		    		carson.startChatting(ChatbotYonathan.decoder(response));
 		    	}
 		    	else
 		    	{
-		    		ChatbotMain.print(ChatbotYonathan.encoder("I'm sorry, I dont understand ,maybe you could rephrase"));
+		    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
 		    	}
 		    	
 		 }
