@@ -11,7 +11,7 @@ public class Chatbot {
 
 	public Chatbot() {
 		david = new ChatbotDavidLi();
-		yonathan = new ChatbotYonathan(); // EDIT THIS WITH YOUR ACTUAL CLASS FILES WHEN YOU MAKE THEM
+		yonathan = new ChatbotYonathan(); // EDI T THIS WITH YOUR ACTUAL CLASS FILES WHEN YOU MAKE THEM
 		carson = new ChatbotCarson();
 
 		userName = "unknown user";
