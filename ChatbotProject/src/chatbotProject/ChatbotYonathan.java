@@ -11,6 +11,7 @@ public class ChatbotYonathan implements Topic {
 	private boolean chatting;
 	public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
 	public static String alphabet ="abcdefghijklmnopqrstuvwxyz ";
+	
 	private Topic carson = new ChatbotCarson();
     private Topic david = new ChatbotDavidLi();
 	public ChatbotYonathan() {
@@ -34,25 +35,51 @@ public class ChatbotYonathan implements Topic {
 		
 		ChatbotMain.print("prisoners are not allowed to talk so if you want to talk then you need to learn this code");
 		ChatbotMain.print("a=0 b=1 c=00 d=01 e=10 f=11 g = 000 h= 001");
-		ChatbotMain.print("");
+		ChatbotMain.print("i think i see a guard coming if you understand the code then send the word apple");
+		//ChatbotMain.print(encoder("apple"));
+		//ChatbotMain.print(decoder(encoder("apple")));
+		//ChatbotMain.print(decoder("0 4 101 10 "));
 		chatting = true;
 		while(chatting) {
+			//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 			response = decoder(ChatbotMain.getInput());
 			if(response.equals("apple")) {
-				ChatbotMain.print("false alarm their wasnt a guard but great job here is the entire code");
+				ChatbotMain.print("there wasnt a guard but great job here is the entire code");
+				ChatbotMain.print("a=0 b=1 c=00 d=01 e=10 f=11 g=000 h=001 i=010 j=011 k=100 l=101 m=110 n=111 o=0000 p=0001 q=0010 r=0011 s=0100 t=0101 u=0110 v=0111 w=1000 x=1001 y=1010 z=1011");
+				ChatbotMain.print("from here on out we should only talk in code for saftey");
+				ChatbotMain.print(encoder("do you want to talk about escape or do you have questions"));
+				chatting = false;
+			}else {
+				if(!response.substring(0,1).equals("a")) {
+					ChatbotMain.print("there wasnt a guard but you should learn the entire code send me apple again");
+				}else {
+					if(!response.substring(1,2).equals("p")) {
+						ChatbotMain.print("there wasnt a guard but you should learn the entire code send me apple again p is 0001");
+					}else {
+						if(!response.substring(3,4).equals("l")) {
+							ChatbotMain.print("there wasnt a guard but you should learn the entire code send me apple again l is 101");
+						}
+					}	
+				}
 			}
 			
-			if(david.isTriggered(ChatbotYonathan.decoder(response))) {
-	    		chatting = false;
-	    		david.startChatting(ChatbotYonathan.decoder(response));
-	    		
-	    	} 
-	    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
-	    		chatting = false;
-	    		carson.startChatting(ChatbotYonathan.decoder(response));
-	    	}
-			
+	    	//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 		}
+		chatting = true;
+		while(chatting) {
+			if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
+			response = decoder(ChatbotMain.getInput());
+			if(david.isTriggered(ChatbotYonathan.decoder(response))) {
+				chatting = false;
+				david.startChatting(ChatbotYonathan.decoder(response));
+				
+    			} 
+    			if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
+    				chatting = false;
+    				carson.startChatting(ChatbotYonathan.decoder(response));
+    			}
+    			if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
+    	}
 	}
 	public static String encoder(String in){
 		int i = 0;

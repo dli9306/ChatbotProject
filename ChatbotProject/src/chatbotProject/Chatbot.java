@@ -52,6 +52,7 @@ public class Chatbot {
 		chatting = true;
 		while(chatting){
 			ChatbotMain.print("ok " + userName + " if you want to talk say yes");
+			
 			String response = ChatbotMain.getInput().toLowerCase();
 			if(david.isTriggered(response)) {
 				chatting = false;
