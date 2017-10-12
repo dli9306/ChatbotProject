@@ -10,6 +10,7 @@ public class ChatbotCarson implements Topic{
 	private int questionCount = 0;
 	private int replyCount = 0;
 	private boolean chatting;
+	private Topic david = new ChatbotDavidLi();
 	
 	public ChatbotCarson() {
 		String[] temp = {"escape","freedom","plan"};
@@ -52,6 +53,23 @@ public class ChatbotCarson implements Topic{
 			}
 		}
 	}
+	
+	private void changeTopic() {
+		 String response = ChatbotMain.getInput();
+		 //ChatbotMain.print(ChatbotYonathan.decoder(response));
+	    	if(isTriggered(ChatbotYonathan.decoder(response))) {
+	    		questionCount = 0;
+	    		replyCount = -1;
+	    		ChatbotMain.print("Ok lets talk some more Ask me some questions");
+	    	}
+	    	else if(david.isTriggered(ChatbotYonathan.decoder(response))) {
+	    		chatting = false;
+	    		david.startChatting(ChatbotYonathan.decoder(response));
+	    	}
+	    	else {
+	    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
+	    	}
+	 }
 	
 	public void stopRepetitions(String str1, String str2) {
 		int numReps = 0;
