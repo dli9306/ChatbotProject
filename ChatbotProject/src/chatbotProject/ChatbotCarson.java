@@ -71,7 +71,7 @@ public class ChatbotCarson implements Topic{
 		}
 		lastResponse = response;
 	}
-
+//
 	private void askQuestions() {
 		String response = ChatbotMain.getInput();
 		stopRepetitions("Sorry I think you just said that", "Please stop repeating yourself you are making a fool of yourself");
