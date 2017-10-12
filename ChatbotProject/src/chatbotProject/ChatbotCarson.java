@@ -44,9 +44,9 @@ public class ChatbotCarson implements Topic{
 				}
 			}
 			for(int i = 0; i < endWords.length; i++) {
-				if(ChatbotMain.findKeyWord(response.toLowerCase(), endWords[i], 0) >= 0) {
+				if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
 					chatting = false;
-					ChatbotMain.print("Alright I will talk to you later I guess");
+					ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
 					ChatbotMain.chatbot.startTalking();
 				}
 			}
