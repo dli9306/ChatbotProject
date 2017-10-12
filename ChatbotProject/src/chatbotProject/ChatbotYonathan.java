@@ -65,21 +65,7 @@ public class ChatbotYonathan implements Topic {
 			
 	    	//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 		}
-		chatting = true;
-		while(chatting) {
-			if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
-			response = decoder(ChatbotMain.getInput());
-			if(david.isTriggered(ChatbotYonathan.decoder(response))) {
-				chatting = false;
-				david.startChatting(ChatbotYonathan.decoder(response));
-				
-    			} 
-    			if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
-    				chatting = false;
-    				carson.startChatting(ChatbotYonathan.decoder(response));
-    			}
-    			if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
-    	}
+		changeTopic();
 	}
 	public static String encoder(String in){
 		int i = 0;
@@ -149,4 +135,27 @@ public class ChatbotYonathan implements Topic {
 			}
 		} return output; 
 	}
+	 private void changeTopic()
+	 {
+		 String response = ChatbotMain.getInput();
+		 //ChatbotMain.print(ChatbotYonathan.decoder(response));
+	    	if(isTriggered(decoder(response))) {
+	    		
+	    		ChatbotMain.print("Ok lets talk some more Ask me some questions");
+	    	}
+	    	else if(carson.isTriggered(decoder(response))) {
+	    		chatting = false;
+	    		carson.startChatting(decoder(response));
+	    	}else if(david.isTriggered(decoder(response))) {
+	    		chatting = false;
+	    		david.startChatting(decoder(response));
+	    	}
+	    	else
+	    	{
+	    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
+	    	/*	String encoded = ChatbotYonathan.encoder("I am sorry I dont under stand maybe you could rephrase");
+	    		ChatbotMain.print(encoded);
+	    		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
+	    		*/
+	    	}}
 }
