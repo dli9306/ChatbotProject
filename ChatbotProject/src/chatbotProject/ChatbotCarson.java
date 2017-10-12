@@ -10,7 +10,6 @@ public class ChatbotCarson implements Topic{
 	private int questionCount = 0;
 	private int replyCount = 0;
 	private boolean chatting;
-	private Topic david = new ChatbotDavidLi();
 	
 	public ChatbotCarson() {
 		String[] temp = {"escape","freedom","plan"};
