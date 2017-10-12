@@ -120,11 +120,11 @@ public class ChatbotCarson implements Topic{
 	private void nextStep() {
 		String response = ChatbotMain.getInput();
 		int stepCount = 0;
-		if(response.toLowerCase().contains("next") && response.toLowerCase().contains("step") && stepCount < 5) {
-			ChatbotMain.print(answers[stepCount + 1]);
+		if(ChatbotYonathan.decoder(response).toLowerCase().contains("next") && ChatbotYonathan.decoder(response).toLowerCase().contains("step") && stepCount < 5) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[stepCount + 1]));
 			stepCount++;
-		}else if(response.toLowerCase().contains("previous") && response.toLowerCase().contains("step") && stepCount > 0) {
-			ChatbotMain.print(answers[stepCount - 1]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("previous") && response.toLowerCase().contains("step") && stepCount > 0) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[stepCount - 1]));
 		}
 		
 	}
@@ -137,34 +137,35 @@ public class ChatbotCarson implements Topic{
 		}
 		String response = ChatbotMain.getInput();
 		
-		nextStep();
-		
 		if(response.toLowerCase().contains("how") && response.toLowerCase().contains("escape")) {
-			ChatbotMain.print(answers[0]);
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[0]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("first") || response.toLowerCase().contains("1st")) {
-			ChatbotMain.print(answers[0]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("first") || response.toLowerCase().contains("1st")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[0]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("second") || response.toLowerCase().contains("2nd")) {
-			ChatbotMain.print(answers[1]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("second") || response.toLowerCase().contains("2nd")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[1]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("third") || response.toLowerCase().contains("3rd")) {
-			ChatbotMain.print(answers[2]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("third") || response.toLowerCase().contains("3rd")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[2]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("fourth") || response.toLowerCase().contains("4th")) {
-			ChatbotMain.print(answers[3]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("fourth") || response.toLowerCase().contains("4th")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[3]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("fith") || response.toLowerCase().contains("5th")) {
-			ChatbotMain.print(answers[4]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("fith") || response.toLowerCase().contains("5th")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
-			ChatbotMain.print(answers[5]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[5]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")){
-			ChatbotMain.print(answers[4]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("last") && response.toLowerCase().contains("escape")){
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
 			replyCount++;
-		}else if(response.toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
-			ChatbotMain.print(answers[6]);
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
+			ChatbotMain.print(ChatbotYonathan.encoder(answers[6]));
+			replyCount++;
+		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("next") || response.toLowerCase().contains("previous")) {
+			nextStep();
 			replyCount++;
 		}else {
 			ChatbotMain.print("Sorry, im not sure I understand, try asking me about specific steps of the plan though." + "\n" + "You can also ask about previous or next steps of my plan.");
