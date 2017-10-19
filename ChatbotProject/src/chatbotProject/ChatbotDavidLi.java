@@ -51,17 +51,18 @@ public class ChatbotDavidLi implements Topic {
 	@Override
 	public void startChatting(String response) {
 		//ChatbotMain.print("So lets get started what do you want to ask");
-		String encoded = ChatbotYonathan.encoder("So lets get started what do you want to ask");
+		String encoded = "So lets get started what do you want to ask";
 		ChatbotMain.print(encoded);
 		//ChatbotMain.print(ChatbotYonathan.decoder(encoded));
 		chatting = true;
 		 while(chatting) {
 		    response = ChatbotMain.getInput();
-			if (checkNumber(response) || checkLetter(response))
+		/*	if (checkNumber(response) || checkLetter(response))
 			{
 				ChatbotMain.print(ChatbotYonathan.encoder("Wrong use of code"));
 			}
-			else if(checkBye(response)) {
+			else 
+			*/ if(checkBye(response)) {
 				 convoResponse(response);
 				 convoQuestion(response);
 				 }
@@ -69,7 +70,7 @@ public class ChatbotDavidLi implements Topic {
 				 {
 				 for(int i =0;i<endWords.length;i++) 
 				  {
-					  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
+					  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 					  chatting = false;
 					  ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
 					  ChatbotMain.chatbot.startTalking();
@@ -112,9 +113,9 @@ public class ChatbotDavidLi implements Topic {
 		
 		  for(int i =0;i<endWords.length;i++) 
 		  {
-			  if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
+			  if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 			  chatting = false;
-			  ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
+			  ChatbotMain.print("Alright I will talk to you later I guess");
 			  ChatbotMain.chatbot.startTalking();
 			  return false;
 			  }   
@@ -134,7 +135,7 @@ public class ChatbotDavidLi implements Topic {
 		 }
 		 if(questionCount == 5)
 		 {
-			    System.out.println(ChatbotYonathan.encoder("But thats enough about me I am going to ask you a few questions now"));
+			    System.out.println("But thats enough about me I am going to ask you a few questions now");
 			    questionCount++;
 			    replyCount++;
 		  }
@@ -162,17 +163,17 @@ public class ChatbotDavidLi implements Topic {
       	  else { 
       		  	 if(replyCount == 5)
       		  	 {
-      		  		ChatbotMain.print(ChatbotYonathan.encoder("Ok seems we have talked for quite a bit now  So what do you think of me so far"));
-      		  		ChatbotMain.print("question");
+      		  		ChatbotMain.print("Ok seems we have talked for quite a bit now  So what do you think of me so far");
+      		  		//ChatbotMain.print("question");
       		  		replyCount++;
-      		  	System.out.println(replyCount);
+      		  	//System.out.println(replyCount);
       		  	 }
       		  	 else
       		  	 {
       		  		if(replyCount == 6)
       		  		{
       		  		replyResponse3(response);
-      		  		ChatbotMain.print("answer");
+      		  		//ChatbotMain.print("answer");
       		  	    replyCount++;
       		  	     //System.out.println(replyCount);
       		  		}
@@ -182,7 +183,7 @@ public class ChatbotDavidLi implements Topic {
       		  			//System.out.println(replyCount);
   			             }
       		  			if(replyCount == 8) {
-      		  				ChatbotMain.print(ChatbotYonathan.encoder("So what do you want to talk about"));
+      		  				ChatbotMain.print("So what do you want to talk about");
       		  			    changeTopic();
       		  				//System.out.println(replyCount);
       		  				}
@@ -199,23 +200,23 @@ public class ChatbotDavidLi implements Topic {
 
 		private void replyResponse(String response) {
 			//response to User's questions
-			   if(ChatbotYonathan.decoder(response).contains("who")) {
+			   if(response.contains("who")) {
 				  ChatbotMain.print(answers[0]);
 			  }
-			  else if(ChatbotYonathan.decoder(response).contains("where")) {
-				  ChatbotMain.print(ChatbotYonathan.encoder(answers[1]));
-			  } else if(ChatbotYonathan.decoder(response).contains("why") && ChatbotYonathan.decoder(response).contains("here")) {
-				  ChatbotMain.print(ChatbotYonathan.encoder(answers[2]));
-			  }else if(ChatbotYonathan.decoder(response).contains("how") && ChatbotYonathan.decoder(response).contains("caught") || ChatbotYonathan.decoder(response).contains("what") && ChatbotYonathan.decoder(response).contains("happened"))
-			  {	  ChatbotMain.print(ChatbotYonathan.encoder(answers[3]));
-			  }else if(ChatbotYonathan.decoder(response).contains("how") && ChatbotYonathan.decoder(response).contains("long")){
+			  else if(response.contains("where")) {
+				  ChatbotMain.print(answers[1]);
+			  } else if(response.contains("why") && response.contains("here")) {
+				  ChatbotMain.print(answers[2]);
+			  }else if(response.contains("how") && response.contains("caught") || response.contains("what") && response.contains("happened"))
+			  {	  ChatbotMain.print(answers[3]);
+			  }else if(response.contains("how") && response.contains("long")){
 			    ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
-			  }else if(ChatbotYonathan.decoder(response).contains("feel")){
+			  }else if(response.contains("feel")){
 			    ChatbotMain.print(ChatbotYonathan.encoder(answers[5]));
-			  }else if(ChatbotYonathan.decoder(response).contains("where") && ChatbotYonathan.decoder(response).contains("live") ) {
-	            ChatbotMain.print(ChatbotYonathan.encoder(answers[6]));
+			  }else if(response.contains("where") && response.contains("live") ) {
+	            ChatbotMain.print(answers[6]);
 			  }else {
-				ChatbotMain.print(ChatbotYonathan.encoder("I am afraid I cannot answer that nor can I understand it You can ask another question if you would like"));
+				ChatbotMain.print("I am afraid I cannot answer that nor can I understand it You can ask another question if you would like");
 			  }
 			  
 			 
@@ -228,18 +229,18 @@ public class ChatbotDavidLi implements Topic {
 			 boolean notHappy = true;
 			 for(int i =0;i<sadWords.length;i++)
 			 {
-				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), sadWords[i], 0) >= 0) {
-					 ChatbotMain.print(ChatbotYonathan.encoder(sadReplies[randNumber]));
+				 if(ChatbotMain.findKeyWord(response, sadWords[i], 0) >= 0) {
+					 ChatbotMain.print(sadReplies[randNumber]);
 					 notSad = false;
 				 }
-				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), happyWords[i], 0) >= 0) {
-					 ChatbotMain.print(ChatbotYonathan.encoder(happyReplies[randNumber]));
+				 if(ChatbotMain.findKeyWord(response, happyWords[i], 0) >= 0) {
+					 ChatbotMain.print(happyReplies[randNumber]);
 					 notHappy = false;
 				 }
 			 }
 			 
 			 if(notSad && notHappy) {
-			 ChatbotMain.print(ChatbotYonathan.encoder(replies[randReplies]));
+			 ChatbotMain.print(replies[randReplies]);
 			 
 			 }
 			 
@@ -251,14 +252,14 @@ public class ChatbotDavidLi implements Topic {
 			 int randNumber2 = (int)(Math.random()*2+0);
 			 for(int i =0;i<insultWords.length;i++)
 			 {
-				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), insultWords[i], 0) >= 0) {
-					 ChatbotMain.print(ChatbotYonathan.encoder(insultReplies[randReplies]) + " " + ChatbotYonathan.encoder(insultWords[i]) + ChatbotYonathan.encoder(" You do realize that I am the only one you can talk to RIGHT"));
+				 if(ChatbotMain.findKeyWord(response, insultWords[i], 0) >= 0) {
+					 ChatbotMain.print(insultReplies[randReplies] + " " + insultWords[i].toUpperCase() +" You do realize that I am the only one you can talk to RIGHT");
 					 insultW = insultWords[i];
 					 insulted = true; //chatbot is insulted
 				 }
 				 else {
-				 if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), happyWords[i], 0) >= 0) {
-					 ChatbotMain.print(ChatbotYonathan.encoder(happyReplies[randNumber2]));
+				 if(ChatbotMain.findKeyWord(response, happyWords[i], 0) >= 0) {
+					 ChatbotMain.print(happyReplies[randNumber2]);
 					 
 				 }
 				 }
@@ -275,7 +276,7 @@ public class ChatbotDavidLi implements Topic {
 			  {
 				 randQues =  (int) (Math.random() * randQuestions.length + 0);
 			  }
-			 ChatbotMain.print(ChatbotYonathan.encoder(randQ[randQues]));
+			 ChatbotMain.print(randQ[randQues]);
 			 //randQ[randQues] = " ";
 
 		 }
@@ -284,18 +285,18 @@ public class ChatbotDavidLi implements Topic {
 		 {
 			 String response = ChatbotMain.getInput();
 			 //ChatbotMain.print(ChatbotYonathan.decoder(response));
-		    	if(isTriggered(ChatbotYonathan.decoder(response))) {
+		    	if(isTriggered(response)) {
 		    		questionCount = 0;
 		    		replyCount = -1;
 		    		ChatbotMain.print("Ok lets talk some more Ask me some questions");
 		    	}
-		    	else if(carson.isTriggered(ChatbotYonathan.decoder(response))) {
+		    	else if(carson.isTriggered(response)) {
 		    		chatting = false;
-		    		carson.startChatting(ChatbotYonathan.decoder(response));
+		    		carson.startChatting(response);
 		    	}
 		    	else
 		    	{
-		    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
+		    		ChatbotMain.print("I am sorry I dont understand maybe you could rephrase");
 		    	/*	String encoded = ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase");
 		    		ChatbotMain.print(encoded);
 		    		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
@@ -306,12 +307,12 @@ public class ChatbotDavidLi implements Topic {
 		 }
        private void expressFeelings() {
     	   if(insulted) {
-				 ChatbotMain.print(ChatbotYonathan.encoder("Whatever who cares if you think I'm ") + ChatbotYonathan.encoder(insultW) +ChatbotYonathan.encoder(" you are a nobody Does your little brain want to ask me more questions or do you want to escape already Not that I care"));
+				 ChatbotMain.print("Whatever who cares if you think I'm " + insultW +" you are a nobody Do you want to keep asking me more questions or do you want to escape already Not that I care");
 				 //ChatbotMain.print("INSULTED");
 			     }
 			     else
 			     {
-			    ChatbotMain.print(ChatbotYonathan.encoder("Now that you have learned more about me do you want to learn how to escape or ask me more questions"));
+			    ChatbotMain.print("Now that you have learned more about me do you want to learn how to escape or ask me more questions");
 			   // ChatbotMain.print("NOT INSULTED");
 			     }
        }
