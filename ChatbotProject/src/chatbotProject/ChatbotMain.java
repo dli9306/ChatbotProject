@@ -67,7 +67,7 @@ public class ChatbotMain {
 	}
 
 	public static boolean noNegations(String s, int psn){
-		  if(psn == 0)
+		  if(psn == 0 || psn < 4)
 		  {
 			  return true;
 		  }
