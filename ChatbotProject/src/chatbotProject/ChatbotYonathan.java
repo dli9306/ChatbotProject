@@ -9,6 +9,7 @@ public class ChatbotYonathan implements Topic {
 	private String goodbyeWord;
 	private String secretWord;
 	private boolean chatting;
+	private boolean nextChatting;
 	public static final String[] alphabetsoup ={"0","1","00","01","10","11","000","001","010","011","100","101","110","111","0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011"," "};
 	public static String alphabet ="abcdefghijklmnopqrstuvwxyz ";
 	
@@ -40,6 +41,7 @@ public class ChatbotYonathan implements Topic {
 		//ChatbotMain.print(decoder(encoder("apple")));
 		//ChatbotMain.print(decoder("0 4 101 10 "));
 		chatting = true;
+		nextChatting = false;
 		while(chatting) {
 			//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 			response = decoder(ChatbotMain.getInput());
@@ -49,6 +51,7 @@ public class ChatbotYonathan implements Topic {
 				ChatbotMain.print("from here on out we should only talk in code for saftey");
 				ChatbotMain.print(encoder("do you want to talk about escape or do you have questions"));
 				chatting = false;
+				nextChatting = true;
 			}else {
 				if(!response.substring(0,1).equals("a")) {
 					ChatbotMain.print("there wasnt a guard but you should learn the entire code send me apple again");
@@ -65,7 +68,9 @@ public class ChatbotYonathan implements Topic {
 			
 	    	//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 		}
+		while(nextChatting) {
 		changeTopic();
+		}
 	}
 	public static String encoder(String in){
 		int i = 0;
@@ -139,15 +144,11 @@ public class ChatbotYonathan implements Topic {
 	 {
 		 String response = ChatbotMain.getInput();
 		 //ChatbotMain.print(ChatbotYonathan.decoder(response));
-	    	if(isTriggered(decoder(response))) {
-	    		
-	    		ChatbotMain.print("Ok lets talk some more Ask me some questions");
-	    	}
-	    	else if(carson.isTriggered(decoder(response))) {
-	    		chatting = false;
+	    	if(carson.isTriggered(decoder(response))) {
+	    		nextChatting = false;
 	    		carson.startChatting(decoder(response));
 	    	}else if(david.isTriggered(decoder(response))) {
-	    		chatting = false;
+	    		nextChatting = false;
 	    		david.startChatting(decoder(response));
 	    	}
 	    	else
