@@ -44,9 +44,9 @@ public class ChatbotCarson implements Topic{
 				}
 			}
 			for(int i = 0; i < endWords.length; i++) {
-				if(ChatbotMain.findKeyWord(ChatbotYonathan.decoder(response), endWords[i], 0) >= 0) {
+				if(ChatbotMain.findKeyWord(response, endWords[i], 0) >= 0) {
 					chatting = false;
-					ChatbotMain.print(ChatbotYonathan.encoder("Alright I will talk to you later I guess"));
+					ChatbotMain.print("Alright I will talk to you later I guess");
 					ChatbotMain.chatbot.startTalking();
 				}
 			}
@@ -120,11 +120,11 @@ public class ChatbotCarson implements Topic{
 	private void nextStep() {
 		String response = ChatbotMain.getInput();
 		int stepCount = 0;
-		if(ChatbotYonathan.decoder(response).toLowerCase().contains("next") && ChatbotYonathan.decoder(response).toLowerCase().contains("step") && stepCount < 5) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[stepCount + 1]));
+		if(response.toLowerCase().contains("next") && response.toLowerCase().contains("step") && stepCount < 5) {
+			ChatbotMain.print(answers[stepCount + 1]);
 			stepCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("previous") && response.toLowerCase().contains("step") && stepCount > 0) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[stepCount - 1]));
+		}else if(response.toLowerCase().contains("previous") && response.toLowerCase().contains("step") && stepCount > 0) {
+			ChatbotMain.print(answers[stepCount - 1]);
 		}
 		
 	}
@@ -138,33 +138,33 @@ public class ChatbotCarson implements Topic{
 		String response = ChatbotMain.getInput();
 		
 		if(response.toLowerCase().contains("how") && response.toLowerCase().contains("escape")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[0]));
+			ChatbotMain.print(answers[0]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("first") || response.toLowerCase().contains("1st")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[0]));
+		}else if(response.toLowerCase().contains("first") || response.toLowerCase().contains("1st")) {
+			ChatbotMain.print(answers[0]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("second") || response.toLowerCase().contains("2nd")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[1]));
+		}else if(response.toLowerCase().contains("second") || response.toLowerCase().contains("2nd")) {
+			ChatbotMain.print(answers[1]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("third") || response.toLowerCase().contains("3rd")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[2]));
+		}else if(response.toLowerCase().contains("third") || response.toLowerCase().contains("3rd")) {
+			ChatbotMain.print(answers[2]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("fourth") || response.toLowerCase().contains("4th")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[3]));
+		}else if(response.toLowerCase().contains("fourth") || response.toLowerCase().contains("4th")) {
+			ChatbotMain.print(answers[3]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("fith") || response.toLowerCase().contains("5th")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
+		}else if(response.toLowerCase().contains("fith") || response.toLowerCase().contains("5th")) {
+			ChatbotMain.print(answers[4]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[5]));
+		}else if(response.toLowerCase().contains("why") && response.toLowerCase().contains("escape")) {
+			ChatbotMain.print(answers[5]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("last") && response.toLowerCase().contains("escape")){
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[4]));
+		}else if(response.toLowerCase().contains("last") && response.toLowerCase().contains("escape")){
+			ChatbotMain.print(answers[4]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
-			ChatbotMain.print(ChatbotYonathan.encoder(answers[6]));
+		}else if(response.toLowerCase().contains("if") && response.toLowerCase().contains("caught")) {
+			ChatbotMain.print(answers[6]);
 			replyCount++;
-		}else if(ChatbotYonathan.decoder(response).toLowerCase().contains("next") || response.toLowerCase().contains("previous")) {
+		}else if(response.toLowerCase().contains("next") || response.toLowerCase().contains("previous")) {
 			nextStep();
 			replyCount++;
 		}else {
