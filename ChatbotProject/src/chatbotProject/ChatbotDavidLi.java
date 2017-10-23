@@ -183,7 +183,7 @@ public class ChatbotDavidLi implements Topic {
       		  			//System.out.println(replyCount);
   			             }
       		  			if(replyCount == 8) {
-      		  				ChatbotMain.print("So what do you want to talk about");
+      		  				ChatbotMain.print("So what is it going to be");
       		  			    changeTopic();
       		  				//System.out.println(replyCount);
       		  				}
