@@ -45,11 +45,14 @@ public class ChatbotYonathan implements Topic {
 		while(chatting) {
 			//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
 			response = decoder(ChatbotMain.getInput());
+			if(response.length() != 5) {
+				ChatbotMain.print("apple has five letters dont forget to put space between each letter");
+			}else {
 			if(response.equals("apple")) {
 				ChatbotMain.print("there wasnt a guard but great job here is the entire code");
 				ChatbotMain.print("a=0 b=1 c=00 d=01 e=10 f=11 g=000 h=001 i=010 j=011 k=100 l=101 m=110 n=111 o=0000 p=0001 q=0010 r=0011 s=0100 t=0101 u=0110 v=0111 w=1000 x=1001 y=1010 z=1011");
-				ChatbotMain.print("from here on out we should only talk in code for saftey");
-				ChatbotMain.print(encoder("do you want to talk about escape or do you have questions"));
+				
+				ChatbotMain.print(("do you want to talk about escape or do you have questions"));
 				chatting = false;
 				nextChatting = true;
 			}else {
@@ -67,6 +70,7 @@ public class ChatbotYonathan implements Topic {
 			}
 			
 	    	//if(chatting) { ChatbotMain.print("true");}else {ChatbotMain.print("false");}
+		}
 		}
 		while(nextChatting) {
 		changeTopic();
