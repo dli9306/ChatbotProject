@@ -148,16 +148,16 @@ public class ChatbotYonathan implements Topic {
 	 {
 		 String response = ChatbotMain.getInput();
 		 //ChatbotMain.print(ChatbotYonathan.decoder(response));
-	    	if(carson.isTriggered(decoder(response))) {
+	    	if(carson.isTriggered(response)) {
 	    		nextChatting = false;
-	    		carson.startChatting(decoder(response));
-	    	}else if(david.isTriggered(decoder(response))) {
+	    		carson.startChatting(response);
+	    	}else if(david.isTriggered(response)) {
 	    		nextChatting = false;
-	    		david.startChatting(decoder(response));
+	    		david.startChatting(response);
 	    	}
 	    	else
 	    	{
-	    		ChatbotMain.print(ChatbotYonathan.encoder("I am sorry I dont understand maybe you could rephrase"));
+	    		ChatbotMain.print(("I am sorry I dont understand maybe you could rephrase"));
 	    	/*	String encoded = ChatbotYonathan.encoder("I am sorry I dont under stand maybe you could rephrase");
 	    		ChatbotMain.print(encoded);
 	    		ChatbotMain.print(ChatbotYonathan.decoder(encoded));
